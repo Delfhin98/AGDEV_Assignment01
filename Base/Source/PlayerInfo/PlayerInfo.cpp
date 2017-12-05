@@ -18,7 +18,7 @@ CPlayerInfo::CPlayerInfo(void)
 	, m_dAcceleration(10.0)
 	, m_bJumpUpwards(false)
 	, m_dJumpSpeed(10.0)
-	, m_dJumpAcceleration(-10.0)
+	, m_dJumpAcceleration(-20.0)
 	, m_bFallDownwards(false)
 	, m_dFallSpeed(0.0)
 	, m_dFallAcceleration(-10.0)
@@ -116,7 +116,7 @@ void CPlayerInfo::SetToJumpUpwards(bool isOnJumpUpwards)
 	{
 		m_bJumpUpwards = true;
 		m_bFallDownwards = false;
-		m_dJumpSpeed = 4.0;
+		m_dJumpSpeed = 10.0;
 	}
 }
 
@@ -275,8 +275,8 @@ void CPlayerInfo::Update(double dt)
 	double mouse_diff_x, mouse_diff_y;
 	MouseController::GetInstance()->GetMouseDelta(mouse_diff_x, mouse_diff_y);
 
-	double camera_yaw = mouse_diff_x * 0.0174555555555556;		// 3.142 / 180.0
-	double camera_pitch = mouse_diff_y * 0.0174555555555556;	// 3.142 / 180.0
+	double camera_yaw = mouse_diff_x * 0.0174555555555556 * 3;		// 3.142 / 180.0
+	double camera_pitch = mouse_diff_y * 0.0174555555555556 * 3;	// 3.142 / 180.0
 
 	// Update the position if the WASD buttons were activated
 	if (KeyboardController::GetInstance()->IsKeyDown('W') ||
