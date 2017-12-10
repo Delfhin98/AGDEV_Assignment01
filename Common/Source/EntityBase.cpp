@@ -1,11 +1,13 @@
 #include "EntityBase.h"
 
-EntityBase::EntityBase() 
+EntityBase::EntityBase()
 	: position(0.0f, 0.0f, 0.0f)
 	, scale(1.0f, 1.0f, 1.0f)
 	, isDone(false)
 	, m_bCollider(false)
 	, bLaser(false)
+	, angle(0.f)
+	, rotate(0.f, 1.f, 0.f)
 {
 }
 

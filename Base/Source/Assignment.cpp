@@ -161,6 +161,13 @@ void Assignment::Init()
 	MeshBuilder::GetInstance()->GenerateRay("laser", 10.0f);
 	MeshBuilder::GetInstance()->GenerateQuad("GRIDMESH", Color(1, 1, 1), 10.f);
 
+	// Load up Assignment Meshes //
+	// Walls //
+	MeshBuilder::GetInstance()->GenerateOBJ("Wall", "OBJ//Assignment//Wall_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("Wall")->textureID = LoadTGA("Image//Assignment//Wall_UV_TGA.tga");
+
+	RenderWalls();
+
 	// Set up the Spatial Partition and pass it to the EntityManager to manage
 	CSpatialPartition::GetInstance()->Init(100, 100, 10, 10);
 	CSpatialPartition::GetInstance()->SetMesh("GRIDMESH");
@@ -237,6 +244,28 @@ void Assignment::Init()
 		textObj[i] = Create::Text2DObject("text", Vector3(-halfWindowWidth, -halfWindowHeight + fontSize*i + halfFontSize, 0.0f), "", Vector3(fontSize, fontSize, fontSize), Color(0.0f,1.0f,0.0f));
 	}
 	textObj[0]->SetText("HELLO WORLD");
+}
+
+void Assignment::RenderWalls()
+{
+	float m_fPosY_Offset = -10.f;
+
+	// Left Wall
+	GenericEntity* LeftWall = Create::Entity("Wall", Vector3(0.0f, m_fPosY_Offset, -200.0f));
+	LeftWall->SetScale(Vector3(100.f, 50.f, 10.f));
+
+	// Right Wall
+	GenericEntity* RightWall = Create::Entity("Wall", Vector3(0.0f, m_fPosY_Offset, 200.0f));
+	RightWall->SetScale(Vector3(100.f, 50.f, 10.f));
+
+	// Back Wall
+	GenericEntity* BackWall = Create::Entity("Wall", Vector3(200.0f, m_fPosY_Offset, 0.0f), Vector3(0.f, 1.f, 0.f), 90.f, Vector3(100.f, 50.f, 10.f));
+
+	// Front Wall
+	GenericEntity* FrontWall = Create::Entity("Wall", Vector3(-200.0f, m_fPosY_Offset, 0.0f), Vector3(0.f, 1.f, 0.f), 90.f, Vector3(100.f, 50.f, 10.f));
+
+	// Ceiling
+	GenericEntity* Ceiling = Create::Entity("Wall", Vector3(0.0f, 90.f, -200.0f), Vector3(1.f, 0.f, 0.f), 90.f, Vector3(100.f, 200.f, 10.f));
 }
 
 void Assignment::Update(double dt)
