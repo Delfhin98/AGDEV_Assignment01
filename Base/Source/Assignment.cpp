@@ -194,7 +194,35 @@ void Assignment::Init()
 	MeshBuilder::GetInstance()->GetMesh("TurretCursor_MidDef")->textureID = LoadTGA("Image//Assignment//Turret_TargetCursor_UV_Texture_MidDef.tga");
 	MeshBuilder::GetInstance()->GenerateOBJ("TurretCursor_LowDef", "OBJ//Assignment//Turret_TargetCursor_OBJ.obj");
 	MeshBuilder::GetInstance()->GetMesh("TurretCursor_LowDef")->textureID = LoadTGA("Image//Assignment//Turret_TargetCursor_UV_Texture_LowDef.tga");
-
+	// Android Robots //
+	// Base
+	MeshBuilder::GetInstance()->GenerateOBJ("RobotBase_HighDef", "OBJ//Assignment//AndroidBase_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("RobotBase_HighDef")->textureID = LoadTGA("Image//Assignment//AndroidBase_UV_Texture_HighDef.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("RobotBase_MidDef", "OBJ//Assignment//AndroidBase_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("RobotBase_MidDef")->textureID = LoadTGA("Image//Assignment//AndroidBase_UV_Texture_MidDef.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("RobotBase_LowDef", "OBJ//Assignment//AndroidBase_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("RobotBase_LowDef")->textureID = LoadTGA("Image//Assignment//AndroidBase_UV_Texture_LowDef.tga");
+	// Body
+	MeshBuilder::GetInstance()->GenerateOBJ("RobotBody_HighDef", "OBJ//Assignment//AndroidBody_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("RobotBody_HighDef")->textureID = LoadTGA("Image//Assignment//AndroidBody_UV_Texture_HighDef.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("RobotBody_MidDef", "OBJ//Assignment//AndroidBody_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("RobotBody_MidDef")->textureID = LoadTGA("Image//Assignment//AndroidBody_UV_Texture_MidDef.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("RobotBody_LowDef", "OBJ//Assignment//AndroidBody_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("RobotBody_LowDef")->textureID = LoadTGA("Image//Assignment//AndroidBody_UV_Texture_LowDef.tga");
+	// Hands
+	MeshBuilder::GetInstance()->GenerateOBJ("RobotHands_HighDef", "OBJ//Assignment//AndroidHands_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("RobotHands_HighDef")->textureID = LoadTGA("Image//Assignment//AndroidHands_UV_Texture_HighDef.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("RobotHands_MidDef", "OBJ//Assignment//AndroidHands_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("RobotHands_MidDef")->textureID = LoadTGA("Image//Assignment//AndroidHands_UV_Texture_MidDef.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("RobotHands_LowDef", "OBJ//Assignment//AndroidHands_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("RobotHands_LowDef")->textureID = LoadTGA("Image//Assignment//AndroidHands_UV_Texture_LowDef.tga");
+	// Head
+	MeshBuilder::GetInstance()->GenerateOBJ("RobotHead_HighDef", "OBJ//Assignment//AndroidHead_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("RobotHead_HighDef")->textureID = LoadTGA("Image//Assignment//AndroidHead_UV_Texture_HighDef.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("RobotHead_MidDef", "OBJ//Assignment//AndroidHead_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("RobotHead_MidDef")->textureID = LoadTGA("Image//Assignment//AndroidHead_UV_Texture_MidDef.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("RobotHead_LowDef", "OBJ//Assignment//AndroidHead_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("RobotHead_LowDef")->textureID = LoadTGA("Image//Assignment//AndroidHead_UV_Texture_LowDef.tga");
 
 	// Set up the Spatial Partition and pass it to the EntityManager to manage
 	CSpatialPartition::GetInstance()->Init(100, 100, 10, 10);
@@ -205,6 +233,7 @@ void Assignment::Init()
 
 	RenderWalls();
 	RenderTurrets();
+	RenderRobots();
 
 	// Create entities into the scene
 	Create::Entity("reference", Vector3(0.0f, 0.0f, 0.0f)); // Reference
@@ -323,6 +352,31 @@ void Assignment::RenderTurrets()
 	TurretCursor->SetScale(Vector3(15.f, 15.f, 15.f));
 	TurretCursor->InitLOD("TurretCursor_HighDef", "TurretCursor_MidDef", "TurretCursor_LowDef");
 	
+}
+
+void Assignment::RenderRobots()
+{
+	float m_fPosY_Offset = -10.f;
+
+	// Base
+	GenericEntity* RobotBase = Create::Entity("RobotBase_HighDef", Vector3(-100.0f, m_fPosY_Offset, -100.0f));
+	RobotBase->SetScale(Vector3(20.f, 10.f, 20.f));
+	RobotBase->InitLOD("RobotBase_HighDef", "RobotBase_MidDef", "RobotBase_LowDef");
+
+	// Body 
+	GenericEntity* RobotBody = Create::Entity("RobotBody_HighDef", Vector3(-100.0f, m_fPosY_Offset - 7.f, -100.0f));
+	RobotBody->SetScale(Vector3(15.f, 20.f, 15.f));
+	RobotBody->InitLOD("RobotBody_HighDef", "RobotBody_MidDef", "RobotBody_LowDef");
+
+	// Hand
+	GenericEntity* RobotHands = Create::Entity("RobotHands_HighDef", Vector3(-100.0f, m_fPosY_Offset, -95.0f));
+	RobotHands->SetScale(Vector3(10.f, 10.f, 10.f));
+	RobotHands->InitLOD("RobotHands_HighDef", "RobotHands_MidDef", "RobotHands_LowDef");
+
+	// Head - Source
+	GenericEntity* RobotHead = Create::Entity("RobotHead_HighDef", Vector3(-100.0f, m_fPosY_Offset - 2.f, -100.0f));
+	RobotHead->SetScale(Vector3(15.f, 15.f, 15.f));
+	RobotHead->InitLOD("RobotHead_HighDef", "RobotHead_MidDef", "RobotHead_LowDef");
 }
 
 void Assignment::Update(double dt)

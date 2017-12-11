@@ -28,6 +28,7 @@ public:
 
 	void RenderWalls();
 	void RenderTurrets();
+	void RenderRobots();
 
 private:
 	Assignment(SceneManager* _sceneMgr); // This is used to register to SceneManager
