@@ -27,6 +27,7 @@ public:
 	virtual void Exit();
 
 	void RenderWalls();
+	void RenderTurrets();
 
 private:
 	Assignment(SceneManager* _sceneMgr); // This is used to register to SceneManager

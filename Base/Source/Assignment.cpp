@@ -165,15 +165,46 @@ void Assignment::Init()
 	// Walls //
 	MeshBuilder::GetInstance()->GenerateOBJ("Wall", "OBJ//Assignment//Wall_OBJ.obj");
 	MeshBuilder::GetInstance()->GetMesh("Wall")->textureID = LoadTGA("Image//Assignment//Wall_UV_TGA.tga");
+	// Turrets //
+	// Base
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretBase_HighDef", "OBJ//Assignment//Turret_Base_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("TurretBase_HighDef")->textureID = LoadTGA("Image//Assignment//Turret_Base_UV_Texture_HighDef.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretBase_MidDef", "OBJ//Assignment//Turret_Base_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("TurretBase_MidDef")->textureID = LoadTGA("Image//Assignment//Turret_Base_UV_Texture_MidDef.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretBase_LowDef", "OBJ//Assignment//Turret_Base_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("TurretBase_LowDef")->textureID = LoadTGA("Image//Assignment//Turret_Base_UV_Texture_LowDef.tga");
+	// Stand
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretStand_HighDef", "OBJ//Assignment//Turret_Stand_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("TurretStand_HighDef")->textureID = LoadTGA("Image//Assignment//Turret_Stand_UV_Texture_HighDef.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretStand_MidDef", "OBJ//Assignment//Turret_Stand_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("TurretStand_MidDef")->textureID = LoadTGA("Image//Assignment//Turret_Stand_UV_Texture_MidDef.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretStand_LowDef", "OBJ//Assignment//Turret_Stand_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("TurretStand_LowDef")->textureID = LoadTGA("Image//Assignment//Turret_Stand_UV_Texture_LowDef.tga");
+	// Source
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretSource_HighDef", "OBJ//Assignment//Turret_Source_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("TurretSource_HighDef")->textureID = LoadTGA("Image//Assignment//Turret_Source_UV_Texture_HighDef.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretSource_MidDef", "OBJ//Assignment//Turret_Source_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("TurretSource_MidDef")->textureID = LoadTGA("Image//Assignment//Turret_Source_UV_Texture_MidDef.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretSource_LowDef", "OBJ//Assignment//Turret_Source_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("TurretSource_LowDef")->textureID = LoadTGA("Image//Assignment//Turret_Source_UV_Texture_LowDef.tga");
+	// Target Cursor
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretCursor_HighDef", "OBJ//Assignment//Turret_TargetCursor_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("TurretCursor_HighDef")->textureID = LoadTGA("Image//Assignment//Turret_TargetCursor_UV_Texture_HighDef.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretCursor_MidDef", "OBJ//Assignment//Turret_TargetCursor_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("TurretCursor_MidDef")->textureID = LoadTGA("Image//Assignment//Turret_TargetCursor_UV_Texture_MidDef.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretCursor_LowDef", "OBJ//Assignment//Turret_TargetCursor_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("TurretCursor_LowDef")->textureID = LoadTGA("Image//Assignment//Turret_TargetCursor_UV_Texture_LowDef.tga");
 
-	RenderWalls();
 
 	// Set up the Spatial Partition and pass it to the EntityManager to manage
 	CSpatialPartition::GetInstance()->Init(100, 100, 10, 10);
 	CSpatialPartition::GetInstance()->SetMesh("GRIDMESH");
 	CSpatialPartition::GetInstance()->SetCamera(&camera);
-	CSpatialPartition::GetInstance()->SetLevelOfDetails(40000.0f, 160000.0f);
+	CSpatialPartition::GetInstance()->SetLevelOfDetails(10000.0f, 20000.0f);
 	EntityManager::GetInstance()->SetSpatialPartition(CSpatialPartition::GetInstance());
+
+	RenderWalls();
+	RenderTurrets();
 
 	// Create entities into the scene
 	Create::Entity("reference", Vector3(0.0f, 0.0f, 0.0f)); // Reference
@@ -266,6 +297,32 @@ void Assignment::RenderWalls()
 
 	// Ceiling
 	GenericEntity* Ceiling = Create::Entity("Wall", Vector3(0.0f, 90.f, -200.0f), Vector3(1.f, 0.f, 0.f), 90.f, Vector3(100.f, 200.f, 10.f));
+}
+
+void Assignment::RenderTurrets()
+{
+	float m_fPosY_Offset = -10.f;
+
+	// Base
+	GenericEntity* TurretBase = Create::Entity("TurretBase_HighDef", Vector3(100.0f, m_fPosY_Offset, -100.0f));
+	TurretBase->SetScale(Vector3(20.f, 10.f, 20.f));
+	TurretBase->InitLOD("TurretBase_HighDef", "TurretBase_MidDef", "TurretBase_LowDef");
+	
+	// Stand 
+	GenericEntity* TurretStand = Create::Entity("TurretStand_HighDef", Vector3(100.0f, m_fPosY_Offset - 2.f, -100.0f));
+	TurretStand->SetScale(Vector3(10.f, 20.f, 10.f));
+	TurretStand->InitLOD("TurretStand_HighDef", "TurretStand_MidDef", "TurretStand_LowDef");
+
+	// Source
+	GenericEntity* TurretSource = Create::Entity("TurretSource_HighDef", Vector3(100.0f, m_fPosY_Offset + 3.5f, -100.0f));
+	TurretSource->SetScale(Vector3(10.f, 10.f, 10.f));
+	TurretSource->InitLOD("TurretSource_HighDef", "TurretSource_MidDef", "TurretSource_LowDef");
+
+	// Cursor
+	GenericEntity* TurretCursor = Create::Entity("TurretCursor_HighDef", Vector3(100.0f, m_fPosY_Offset, -100.0f));
+	TurretCursor->SetScale(Vector3(15.f, 15.f, 15.f));
+	TurretCursor->InitLOD("TurretCursor_HighDef", "TurretCursor_MidDef", "TurretCursor_LowDef");
+	
 }
 
 void Assignment::Update(double dt)
