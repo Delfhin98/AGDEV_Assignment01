@@ -332,51 +332,66 @@ void Assignment::RenderTurrets()
 {
 	float m_fPosY_Offset = -10.f;
 
+	// Source
+	GenericEntity* TurretSource = Create::Entity("TurretSource_HighDef", Vector3(100.0f, m_fPosY_Offset + 3.5f, -100.0f));
+	TurretSource->SetScale(Vector3(10.f, 10.f, 10.f));
+	TurretSource->InitLOD("TurretSource_HighDef", "TurretSource_MidDef", "TurretSource_LowDef");
+
+	CSceneNode* theSource = CSceneGraph::GetInstance()->AddNode(TurretSource);
+
 	// Base
 	GenericEntity* TurretBase = Create::Entity("TurretBase_HighDef", Vector3(100.0f, m_fPosY_Offset, -100.0f));
 	TurretBase->SetScale(Vector3(20.f, 10.f, 20.f));
 	TurretBase->InitLOD("TurretBase_HighDef", "TurretBase_MidDef", "TurretBase_LowDef");
 	
+	CSceneNode* theBase = theSource->AddChild(TurretBase);
+
 	// Stand 
 	GenericEntity* TurretStand = Create::Entity("TurretStand_HighDef", Vector3(100.0f, m_fPosY_Offset - 2.f, -100.0f));
 	TurretStand->SetScale(Vector3(10.f, 20.f, 10.f));
 	TurretStand->InitLOD("TurretStand_HighDef", "TurretStand_MidDef", "TurretStand_LowDef");
 
-	// Source
-	GenericEntity* TurretSource = Create::Entity("TurretSource_HighDef", Vector3(100.0f, m_fPosY_Offset + 3.5f, -100.0f));
-	TurretSource->SetScale(Vector3(10.f, 10.f, 10.f));
-	TurretSource->InitLOD("TurretSource_HighDef", "TurretSource_MidDef", "TurretSource_LowDef");
+	CSceneNode* theStand = theSource->AddChild(TurretStand);
 
 	// Cursor
 	GenericEntity* TurretCursor = Create::Entity("TurretCursor_HighDef", Vector3(100.0f, m_fPosY_Offset, -100.0f));
 	TurretCursor->SetScale(Vector3(15.f, 15.f, 15.f));
 	TurretCursor->InitLOD("TurretCursor_HighDef", "TurretCursor_MidDef", "TurretCursor_LowDef");
 	
+	CSceneNode* theCursor = theSource->AddChild(TurretCursor);
 }
 
 void Assignment::RenderRobots()
 {
 	float m_fPosY_Offset = -10.f;
 
-	// Base
-	GenericEntity* RobotBase = Create::Entity("RobotBase_HighDef", Vector3(-100.0f, m_fPosY_Offset, -100.0f));
-	RobotBase->SetScale(Vector3(20.f, 10.f, 20.f));
-	RobotBase->InitLOD("RobotBase_HighDef", "RobotBase_MidDef", "RobotBase_LowDef");
+	// Head - Source
+	GenericEntity* RobotHead = Create::Entity("RobotHead_HighDef", Vector3(-100.0f, m_fPosY_Offset - 2.f, -100.0f));
+	RobotHead->SetScale(Vector3(15.f, 15.f, 15.f));
+	RobotHead->InitLOD("RobotHead_HighDef", "RobotHead_MidDef", "RobotHead_LowDef");
+
+	CSceneNode* theSource = CSceneGraph::GetInstance()->AddNode(RobotHead);
 
 	// Body 
 	GenericEntity* RobotBody = Create::Entity("RobotBody_HighDef", Vector3(-100.0f, m_fPosY_Offset - 7.f, -100.0f));
 	RobotBody->SetScale(Vector3(15.f, 20.f, 15.f));
 	RobotBody->InitLOD("RobotBody_HighDef", "RobotBody_MidDef", "RobotBody_LowDef");
 
-	// Hand
+	CSceneNode* theBody = theSource->AddChild(RobotBody);
+
+	// Hands
 	GenericEntity* RobotHands = Create::Entity("RobotHands_HighDef", Vector3(-100.0f, m_fPosY_Offset, -95.0f));
 	RobotHands->SetScale(Vector3(10.f, 10.f, 10.f));
 	RobotHands->InitLOD("RobotHands_HighDef", "RobotHands_MidDef", "RobotHands_LowDef");
 
-	// Head - Source
-	GenericEntity* RobotHead = Create::Entity("RobotHead_HighDef", Vector3(-100.0f, m_fPosY_Offset - 2.f, -100.0f));
-	RobotHead->SetScale(Vector3(15.f, 15.f, 15.f));
-	RobotHead->InitLOD("RobotHead_HighDef", "RobotHead_MidDef", "RobotHead_LowDef");
+	CSceneNode* theHands = theSource->AddChild(RobotHands);
+
+	// Base
+	GenericEntity* RobotBase = Create::Entity("RobotBase_HighDef", Vector3(-100.0f, m_fPosY_Offset, -100.0f));
+	RobotBase->SetScale(Vector3(20.f, 10.f, 20.f));
+	RobotBase->InitLOD("RobotBase_HighDef", "RobotBase_MidDef", "RobotBase_LowDef");
+
+	CSceneNode* theBase = theSource->AddChild(RobotBase);
 }
 
 void Assignment::Update(double dt)
