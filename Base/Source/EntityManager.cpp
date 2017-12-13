@@ -139,6 +139,28 @@ void EntityManager::SetSpatialPartition(CSpatialPartition* theSpatialPartition)
 	this->theSpatialPartition = theSpatialPartition;
 }
 
+bool EntityManager::pointToAABB(Vector3 playerpos, EntityBase * entity)
+{
+	// Get the colliders for the 2 entities
+
+	CCollider *thatCollider = dynamic_cast<CCollider*>(entity);
+
+	// Get the minAABB and maxAABB for each entity
+
+	Vector3 thatMinAABB = entity->GetPosition() + thatCollider->GetMinAABB();
+	Vector3 thatMaxAABB = entity->GetPosition() + thatCollider->GetMaxAABB();
+
+	if (playerpos.x > thatMinAABB.x && playerpos.z > thatMinAABB.z &&
+		playerpos.x < thatMaxAABB.x && playerpos.z < thatMaxAABB.z)
+		return false;
+
+	return true;
+}
+
+std::list<EntityBase*> EntityManager::GetEntityList()
+{
+	return entityList;
+}
 // Constructor
 EntityManager::EntityManager()
 	: theSpatialPartition(NULL)
@@ -403,6 +425,17 @@ bool EntityManager::CheckForCollision(void)
 						{
 							thisEntity->SetIsDone(true);
 							thatEntity->SetIsDone(true);
+
+							// Remove from Scene Graph
+							if (CSceneGraph::GetInstance()->DeleteNode((*colliderThis)) == true)
+							{
+								cout << "*** This Entity removed ***" << endl;
+							}
+							// Remove from Scene Graph
+							if (CSceneGraph::GetInstance()->DeleteNode((*colliderThat)) == true)
+							{
+								cout << "*** That Entity removed ***" << endl;
+							}
 						}
 					}
 				}

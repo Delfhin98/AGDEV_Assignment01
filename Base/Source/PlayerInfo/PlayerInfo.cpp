@@ -8,6 +8,7 @@
 #include "../WeaponInfo/Pistol.h"
 #include "../WeaponInfo/LaserBlaster.h"
 #include "../WeaponInfo/GrenadeThrow.h"
+#include "../EntityManager.h"
 
 // Allocating and initializing CPlayerInfo's static data member.  
 // The pointer is allocated but not the object's constructor.
@@ -286,27 +287,70 @@ void CPlayerInfo::Update(double dt)
 	{
 		Vector3 viewVector = target - position;
 		Vector3 rightUV;
+		bool check = false;
+		Vector3 tempPos = position;
+
 		if (KeyboardController::GetInstance()->IsKeyDown('W'))
 		{
-			position += viewVector.Normalized() * (float)m_dSpeed * (float)dt;
+			tempPos += viewVector.Normalized() * (float)m_dSpeed * (float)dt;
+			for (auto entity : EntityManager::GetInstance()->GetEntityList())
+			{
+				if (!entity->HasCollider())
+					continue;
+				if (EntityManager::GetInstance()->pointToAABB(tempPos, entity))
+					check = true;
+			}
+			if (check)
+				position += viewVector.Normalized() * (float)m_dSpeed * (float)dt;
 		}
 		else if (KeyboardController::GetInstance()->IsKeyDown('S'))
 		{
-			position -= viewVector.Normalized() * (float)m_dSpeed * (float)dt;
+			tempPos -= viewVector.Normalized() * (float)m_dSpeed * (float)dt;
+			for (auto entity : EntityManager::GetInstance()->GetEntityList())
+			{
+				if (!entity->HasCollider())
+					continue;
+				if (EntityManager::GetInstance()->pointToAABB(tempPos, entity))
+					check = true;
+			}
+			if (check)
+				position -= viewVector.Normalized() * (float)m_dSpeed * (float)dt;
 		}
 		if (KeyboardController::GetInstance()->IsKeyDown('A'))
 		{
 			rightUV = (viewVector.Normalized()).Cross(up);
 			rightUV.y = 0;
 			rightUV.Normalize();
-			position -= rightUV * (float)m_dSpeed * (float)dt;
+
+			tempPos -= rightUV * (float)m_dSpeed * (float)dt;
+
+			for (auto entity : EntityManager::GetInstance()->GetEntityList())
+			{
+				if (!entity->HasCollider())
+					continue;
+				if (EntityManager::GetInstance()->pointToAABB(tempPos, entity))
+					check = true;
+			}
+			if (check)
+				position -= rightUV * (float)m_dSpeed * (float)dt;
 		}
 		else if (KeyboardController::GetInstance()->IsKeyDown('D'))
 		{
 			rightUV = (viewVector.Normalized()).Cross(up);
 			rightUV.y = 0;
 			rightUV.Normalize();
-			position += rightUV * (float)m_dSpeed * (float)dt;
+			tempPos += rightUV * (float)m_dSpeed * (float)dt;
+
+			for (auto entity : EntityManager::GetInstance()->GetEntityList())
+			{
+				if (!entity->HasCollider())
+					continue;
+				if (EntityManager::GetInstance()->pointToAABB(tempPos, entity))
+					check = true;
+			}
+
+			if (check)
+				position += rightUV * (float)m_dSpeed * (float)dt;
 		}
 		// Constrain the position
 		Constrain();

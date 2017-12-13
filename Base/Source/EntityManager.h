@@ -21,6 +21,9 @@ public:
 	bool MarkForDeletion(EntityBase* _existingEntity);
 
 	void SetSpatialPartition(CSpatialPartition* theSpatialPartition);
+	
+	bool pointToAABB(Vector3 playerpos, EntityBase *entity);
+	std::list <EntityBase*> GetEntityList();
 
 private:
 	EntityManager();
