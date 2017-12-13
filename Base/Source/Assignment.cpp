@@ -365,6 +365,7 @@ void Assignment::RenderRobots()
 {
 	float m_fPosY_Offset = -10.f;
 
+	// Robot 1 - SceneGraph //
 	// Head - Source
 	GenericEntity* RobotHead = Create::Entity("RobotHead_HighDef", Vector3(-100.0f, m_fPosY_Offset - 2.f, -100.0f));
 	RobotHead->SetScale(Vector3(15.f, 15.f, 15.f));
@@ -392,6 +393,45 @@ void Assignment::RenderRobots()
 	RobotBase->InitLOD("RobotBase_HighDef", "RobotBase_MidDef", "RobotBase_LowDef");
 
 	CSceneNode* theBase = theSource->AddChild(RobotBase);
+
+	// Robot 2 - SceneGraph; Moving Robot back and forth in a Straight Line//
+	// Head - Source
+	GenericEntity* RobotHead_02 = Create::Asset("RobotHead_HighDef", Vector3(-80.0f, m_fPosY_Offset - 2.f, -100.0f));
+	RobotHead_02->SetScale(Vector3(15.f, 15.f, 15.f));
+	//RobotHead_02->InitLOD("RobotHead_HighDef", "RobotHead_MidDef", "RobotHead_LowDef");
+
+	CSceneNode* theSource_02 = CSceneGraph::GetInstance()->AddNode(RobotHead_02);
+
+	CUpdateTransformation* theBaseMtx = new CUpdateTransformation();
+	theBaseMtx->ApplyUpdate(0.0f, 0.0f, 0.1f);
+	theBaseMtx->SetSteps(0, 200);
+	theSource_02->SetUpdateTransformation(theBaseMtx);
+
+	// Body 
+	GenericEntity* RobotBody_02 = Create::Asset("RobotBody_HighDef", Vector3(-80.0f, m_fPosY_Offset - 7.f, -100.0f));
+	RobotBody_02->SetScale(Vector3(15.f, 20.f, 15.f));
+	//RobotBody_02->InitLOD("RobotBody_HighDef", "RobotBody_MidDef", "RobotBody_LowDef");
+
+	CSceneNode* theBody_02 = theSource_02->AddChild(RobotBody_02);
+
+	// Hands
+	GenericEntity* RobotHands_02 = Create::Asset("RobotHands_HighDef", Vector3(-80.0f, m_fPosY_Offset, -95.0f));
+	RobotHands_02->SetScale(Vector3(10.f, 10.f, 10.f));
+	//RobotHands_02->InitLOD("RobotHands_HighDef", "RobotHands_MidDef", "RobotHands_LowDef");
+
+	CSceneNode* theHands_02 = theSource_02->AddChild(RobotHands_02);
+
+	CUpdateTransformation *theChildMtx = new CUpdateTransformation();
+	theChildMtx->ApplyUpdate(0.01f, 0.0f, 0.0f);
+	theChildMtx->SetSteps(-5, 5);
+	theHands_02->SetUpdateTransformation(theChildMtx);
+
+	// Base
+	GenericEntity* RobotBase_02 = Create::Asset("RobotBase_HighDef", Vector3(-80.0f, m_fPosY_Offset, -100.0f));
+	RobotBase_02->SetScale(Vector3(20.f, 10.f, 20.f));
+	//RobotBase_02->InitLOD("RobotBase_HighDef", "RobotBase_MidDef", "RobotBase_LowDef");
+
+	CSceneNode* theBase_02 = theSource_02->AddChild(RobotBase_02);
 }
 
 void Assignment::Update(double dt)
