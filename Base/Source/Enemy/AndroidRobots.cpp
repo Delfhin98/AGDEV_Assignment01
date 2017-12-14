@@ -22,16 +22,16 @@ CAndroidRobot::~CAndroidRobot()
 
 void CAndroidRobot::Init(void)
 {
-	//// Set the default values
-	//defaultPosition.Set(50.0f, -10.0f, -80.0f);
-	//defaultTarget.Set(50.0f, -10, 0);
-	//defaultUp.Set(0, 1, 0);
+	// Set the default values
+	defaultPosition.Set(50.0f, -10.0f, -80.0f);
+	defaultTarget.Set(50.0f, -10, 0);
+	defaultUp.Set(0, 1, 0);
 
-	//// Set the current values
-	//position.Set(50.0f, -10.0f, -80.0f);
-	//target.Set(50.0f, -10, 450);
-	//scale.Set(20.f, 10.f, 20.f);
-	//up.Set(0.0f, 1.0f, 0.0f);
+	// Set the current values
+	position.Set(50.0f, -10.0f, -80.0f);
+	target.Set(50.0f, -10, 450);
+	scale.Set(20.f, 10.f, 20.f);
+	up.Set(0.0f, 1.0f, 0.0f);
 
 	// Set Boundary
 	maxBoundary.Set(1, 1, 1);
@@ -41,41 +41,15 @@ void CAndroidRobot::Init(void)
 	m_dSpeed = 10.0;
 
 	// Initialise the LOD meshes
-	//InitLOD("RobotBase_HighDef", "RobotBase_MidDef", "RobotBase_LowDef");
+	InitLOD("Robot_HighDef", "Robot_MidDef", "Robot_LowDef");
 
-	// LOD - Non-Movable Robot //
-	float m_fPosY_Offset = -10.f;
-	// Head - Source
-	GenericEntity* RobotHead = Create::Entity("RobotHead_HighDef", Vector3(50.f, m_fPosY_Offset - 2.f, -80.0f));
-	RobotHead->SetScale(Vector3(15.f, 15.f, 15.f));
-	RobotHead->InitLOD("RobotHead_HighDef", "RobotHead_MidDef", "RobotHead_LowDef");
+	// Initialise the Collider
+	this->SetCollider(true);
+	this->SetAABB(Vector3(this->GetScale().x * 0.5f, this->GetScale().y * 0.5f, this->GetScale().z * 0.5f), 
+		Vector3(this->GetScale().x * -0.5f, this->GetScale().y * -0.5f, this->GetScale().z * -0.5f));
 
-	// Body 
-	GenericEntity* RobotBody = Create::Entity("RobotBody_HighDef", Vector3(50.f, m_fPosY_Offset - 7.f, -80.0f));
-	RobotBody->SetScale(Vector3(15.f, 20.f, 15.f));
-	RobotBody->InitLOD("RobotBody_HighDef", "RobotBody_MidDef", "RobotBody_LowDef");
-
-	// Hands
-	GenericEntity* RobotHands = Create::Entity("RobotHands_HighDef", Vector3(50.f, m_fPosY_Offset, -75.0f));
-	RobotHands->SetScale(Vector3(10.f, 10.f, 10.f));
-	RobotHands->InitLOD("RobotHands_HighDef", "RobotHands_MidDef", "RobotHands_LowDef");
-
-	// Base
-	GenericEntity* RobotBase = Create::Entity("RobotBase_HighDef", Vector3(50.f, m_fPosY_Offset, -80.0f));
-	RobotBase->SetScale(Vector3(20.f, 10.f, 20.f));
-	RobotBase->SetCollider(true);
-	RobotBase->SetAABB(Vector3(RobotBase->GetScale().x * 0.5f, RobotBase->GetScale().y * 0.5f, RobotBase->GetScale().z * 0.5f),
-		Vector3(RobotBase->GetScale().x * -0.5f, RobotBase->GetScale().y * -0.5f, RobotBase->GetScale().z * -0.5f));
-	RobotBase->InitLOD("RobotBase_HighDef", "RobotBase_MidDef", "RobotBase_LowDef");
-
-
-	//// Initialise the Collider
-	//this->SetCollider(true);
-	//this->SetAABB(Vector3(this->GetScale().x * 0.5f, this->GetScale().y * 0.5f, this->GetScale().z * 0.5f), 
-	//	Vector3(this->GetScale().x * -0.5f, this->GetScale().y * -0.5f, this->GetScale().z * -0.5f));
-
-	//// Add to EntityManager
-	//EntityManager::GetInstance()->AddEntity(this, true);
+	// Add to EntityManager
+	EntityManager::GetInstance()->AddEntity(this, true);
 }
 
 void CAndroidRobot::Reset(void)
@@ -143,7 +117,7 @@ void CAndroidRobot::Update(double dt)
 	position += viewVector * (float)m_dSpeed * (float)dt;
 
 	Constrain();
-
+	
 	// Update the target
 	if (position.z > 100.0f)
 	{

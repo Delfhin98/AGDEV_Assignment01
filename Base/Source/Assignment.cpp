@@ -223,6 +223,14 @@ void Assignment::Init()
 	MeshBuilder::GetInstance()->GetMesh("RobotHead_MidDef")->textureID = LoadTGA("Image//Assignment//AndroidHead_UV_Texture_MidDef.tga");
 	MeshBuilder::GetInstance()->GenerateOBJ("RobotHead_LowDef", "OBJ//Assignment//AndroidHead_OBJ.obj");
 	MeshBuilder::GetInstance()->GetMesh("RobotHead_LowDef")->textureID = LoadTGA("Image//Assignment//AndroidHead_UV_Texture_LowDef.tga");
+	// Android Robot in 1 Piece //
+	MeshBuilder::GetInstance()->GenerateOBJ("Robot_HighDef", "OBJ//Assignment//CombinedAndroidRobot_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("Robot_HighDef")->textureID = LoadTGA("Image//Assignment//CombinedAndroidRobot_UV_HighDef.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("Robot_MidDef", "OBJ//Assignment//CombinedAndroidRobot_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("Robot_MidDef")->textureID = LoadTGA("Image//Assignment//CombinedAndroidRobot_UV_MidDef.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("Robot_LowDef", "OBJ//Assignment//CombinedAndroidRobot_OBJ.obj");
+	MeshBuilder::GetInstance()->GetMesh("Robot_LowDef")->textureID = LoadTGA("Image//Assignment//CombinedAndroidRobot_UV_LowDef.tga");
+
 
 	// Set up the Spatial Partition and pass it to the EntityManager to manage
 	CSpatialPartition::GetInstance()->Init(100, 100, 10, 10);
