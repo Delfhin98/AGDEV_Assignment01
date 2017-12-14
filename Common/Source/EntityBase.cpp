@@ -6,7 +6,10 @@ EntityBase::EntityBase()
 	, isDone(false)
 	, m_bCollider(false)
 	, bLaser(false)
+	, isProjectile(false)
+	, isImmortal(false)
 	, angle(0.f)
+	, HP(1)
 	, rotate(0.f, 1.f, 0.f)
 {
 }
@@ -59,4 +62,44 @@ void EntityBase::SetIsLaser(const bool bLaser)
 bool EntityBase::GetIsLaser(void) const
 {
 	return bLaser;
+}
+
+// Set if is projectile
+void EntityBase::SetIsProjectile(const bool isProjectile)
+{
+	this->isProjectile = isProjectile;
+}
+
+// Get if is projectile
+bool EntityBase::GetIsProjectile(void) const
+{
+	return isProjectile;
+}
+
+// Set if is immortal
+void EntityBase::SetIsImmortal(const bool isImmortal)
+{
+	this->isImmortal = isImmortal;
+}
+
+// Get if is immortal
+bool EntityBase::GetIsImmortal(void) const
+{
+	return isImmortal;
+}
+
+//Set HP
+void  EntityBase::SetHP(int HP)
+{
+	this->HP = HP;
+}
+//Get HP
+int EntityBase::GetHP(void)
+{
+	return HP;
+}
+//Add HP
+void EntityBase::AddHP(int HP)
+{
+	this->HP += HP;
 }

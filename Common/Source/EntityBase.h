@@ -37,6 +37,23 @@ public:
 	// Get the flag, bLaser
 	virtual bool GetIsLaser(void) const;
 
+	// Set if is projectile
+	virtual void SetIsProjectile(const bool isProjectile);
+	// Get if is projectile
+	virtual bool GetIsProjectile(void) const;
+
+	// Set if is immortal
+	virtual void SetIsImmortal(const bool isImmortal);
+	// Get if is immortal
+	virtual bool GetIsImmortal(void) const;
+
+	//Set HP
+	virtual void SetHP(int HP);
+	//Get HP
+	virtual int GetHP(void);
+	//Add HP
+	virtual void AddHP(int HP);
+
 protected:
 	Vector3 position;
 	Vector3 scale;
@@ -44,9 +61,13 @@ protected:
 
 	float angle;
 
+	int HP;
+
 	bool isDone;
 	bool m_bCollider;
 	bool bLaser;
+	bool isProjectile;
+	bool isImmortal;
 };
 
 #endif // ENTITY_BASE_H
