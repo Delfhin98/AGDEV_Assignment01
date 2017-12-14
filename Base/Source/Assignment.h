@@ -10,6 +10,7 @@
 #include "MatrixStack.h"
 #include "GenericEntity.h"
 #include "SceneGraph/UpdateTransformation.h"
+#include "Enemy\AndroidRobots.h"
 
 class ShaderProgram;
 class SceneManager;
@@ -41,6 +42,7 @@ private:
 	Light* lights[2];
 
 	GenericEntity* theCube;
+	CAndroidRobot* theRobot;
 
 	static Assignment* sInstance; // The pointer to the object that gets registered
 };
