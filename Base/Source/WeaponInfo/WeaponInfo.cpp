@@ -149,11 +149,12 @@ void CWeaponInfo::Discharge(Vector3 position, Vector3 target, CPlayerInfo* _sour
 			CProjectile* aProjectile = Create::Projectile("cube", 
 															position, 
 															(target - position).Normalized(), 
-															2.0f, 
-															10.0f,
+															10.0f, 
+															30.0f,
 															_source);
 			aProjectile->SetCollider(true);
 			aProjectile->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
+			aProjectile->SetIsProjectile(true);
 			bFire = false;
 			magRounds--;
 		}

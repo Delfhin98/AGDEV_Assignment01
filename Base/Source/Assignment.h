@@ -31,6 +31,8 @@ public:
 	void RenderTurrets();
 	void RenderRobots();
 
+	void SpawnRobots(float x, float y, float z);
+
 private:
 	Assignment(SceneManager* _sceneMgr); // This is used to register to SceneManager
 

@@ -355,6 +355,9 @@ bool EntityManager::CheckForCollision(void)
 	colliderThisEnd = entityList.end();
 	for (colliderThis = entityList.begin(); colliderThis != colliderThisEnd; ++colliderThis)
 	{
+		if (!(*colliderThis)->GetIsProjectile()) //so colliderThis is always  projectile
+			continue;
+
 		// Check if this entity is a CLaser type
 		if ((*colliderThis)->GetIsLaser())
 		{
@@ -402,6 +405,7 @@ bool EntityManager::CheckForCollision(void)
 				}
 			}
 		}
+
 		else if ((*colliderThis)->HasCollider())
 		{
 			// This object was derived from a CCollider class, then it will have Collision Detection methods
@@ -415,6 +419,8 @@ bool EntityManager::CheckForCollision(void)
 			{
 				if (colliderThat == colliderThis)
 					continue;
+				if ((*colliderThat)->GetIsProjectile()) // so colliderThat is always not a projectile
+					continue;
 
 				if ((*colliderThat)->HasCollider())
 				{
@@ -423,18 +429,29 @@ bool EntityManager::CheckForCollision(void)
 					{
 						if (CheckAABBCollision(thisEntity, thatEntity))
 						{
-							thisEntity->SetIsDone(true);
-							thatEntity->SetIsDone(true);
+							(*colliderThis)->SetIsDone(true); // remove projectile
+
+							if (!(*colliderThat)->GetIsImmortal()) // no collision with immortal objects
+								(*colliderThat)->AddHP(-1);
+
+							if ((*colliderThat)->GetHP() <= 0) // remove object if hp <= 0
+								(*colliderThat)->SetIsDone(true);
 
 							// Remove from Scene Graph
-							if (CSceneGraph::GetInstance()->DeleteNode((*colliderThis)) == true)
+							if ((*colliderThis)->IsDone())
 							{
-								cout << "*** This Entity removed ***" << endl;
+								if (CSceneGraph::GetInstance()->DeleteNode((*colliderThis)) == true)
+								{
+									cout << "*** This Entity removed ***" << endl;
+								}
 							}
 							// Remove from Scene Graph
-							if (CSceneGraph::GetInstance()->DeleteNode((*colliderThat)) == true)
+							if ((*colliderThat)->IsDone())
 							{
-								cout << "*** That Entity removed ***" << endl;
+								if (CSceneGraph::GetInstance()->DeleteNode((*colliderThat)) == true)
+								{
+									cout << "*** That Entity removed ***" << endl;
+								}
 							}
 						}
 					}

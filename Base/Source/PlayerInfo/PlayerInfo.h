@@ -82,6 +82,11 @@ public:
 	// Get the terrain for the player info
 	GroundEntity* GetTerrain(void);
 
+	// Set spawnEnemy
+	void setSpawnEnemy(bool spawn);
+	// Get spawnEnemy
+	bool getSpawnEnemy();
+
 	// Update Jump Upwards
 	void UpdateJumpUpwards(double dt = 0.0333f);
 	// Update FreeFall
@@ -112,6 +117,8 @@ private:
 	double m_dFallSpeed;
 	bool m_bFallDownwards;
 	double m_dFallAcceleration;
+
+	bool spawnEnemy;
 
 	FPSCamera* attachedCamera;
 

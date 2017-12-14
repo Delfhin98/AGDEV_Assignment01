@@ -23,6 +23,7 @@ CPlayerInfo::CPlayerInfo(void)
 	, m_bFallDownwards(false)
 	, m_dFallSpeed(0.0)
 	, m_dFallAcceleration(-10.0)
+	, spawnEnemy(false)
 	, attachedCamera(NULL)
 	, m_pTerrain(NULL)
 	, primaryWeapon(NULL)
@@ -217,6 +218,16 @@ GroundEntity* CPlayerInfo::GetTerrain(void)
 	return m_pTerrain;
 }
 
+void CPlayerInfo::setSpawnEnemy(bool spawn)
+{
+	this->spawnEnemy = spawn;
+}
+
+bool CPlayerInfo::getSpawnEnemy()
+{
+	return spawnEnemy;
+}
+
 // Update Jump Upwards
 void CPlayerInfo::UpdateJumpUpwards(double dt)
 {
@@ -287,7 +298,7 @@ void CPlayerInfo::Update(double dt)
 	{
 		Vector3 viewVector = target - position;
 		Vector3 rightUV;
-		bool check;
+		bool check = true;
 		Vector3 tempPos = position;
 
 		if (KeyboardController::GetInstance()->IsKeyDown('W'))
@@ -471,6 +482,29 @@ void CPlayerInfo::Update(double dt)
 		position.y == m_pTerrain->GetTerrainHeight(position))
 	{
 		SetToJumpUpwards(true);
+	}
+
+	//sprint
+	if (KeyboardController::GetInstance()->IsKeyDown(VK_SHIFT) &&
+		position.y == m_pTerrain->GetTerrainHeight(position))
+	{
+		m_dSpeed = 40.0f;
+	}
+	else
+	{
+		m_dSpeed = 20.0f;
+	}
+
+	//spawn enemy
+	bool ZKeyLock = true;
+	if (KeyboardController::GetInstance()->IsKeyReleased('Z') && ZKeyLock)
+	{
+		ZKeyLock = false;
+		setSpawnEnemy(true);
+	}
+	else
+	{
+		ZKeyLock = true;
 	}
 
 	// Update the weapons

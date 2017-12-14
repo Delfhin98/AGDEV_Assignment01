@@ -23,13 +23,13 @@ CAndroidRobot::~CAndroidRobot()
 void CAndroidRobot::Init(void)
 {
 	// Set the default values
-	defaultPosition.Set(50.0f, -10.0f, -80.0f);
-	defaultTarget.Set(50.0f, -10, 0);
+	defaultPosition.Set(-10.0f, -10.0f, -80.0f);
+	defaultTarget.Set(-10.0f, -10, 0);
 	defaultUp.Set(0, 1, 0);
 
 	// Set the current values
-	position.Set(50.0f, -10.0f, -80.0f);
-	target.Set(50.0f, -10, 450);
+	position.Set(-10.0f, -10.0f, -80.0f);
+	target.Set(-10.0f, -10, 450);
 	scale.Set(20.f, 10.f, 20.f);
 	up.Set(0.0f, 1.0f, 0.0f);
 
@@ -49,7 +49,8 @@ void CAndroidRobot::Init(void)
 		Vector3(this->GetScale().x * -0.5f, this->GetScale().y * -0.5f, this->GetScale().z * -0.5f));
 
 	// Add to EntityManager
-	EntityManager::GetInstance()->AddEntity(this, true);
+	EntityManager::GetInstance()->AddEntity(this, true);
+
 }
 
 void CAndroidRobot::Reset(void)
