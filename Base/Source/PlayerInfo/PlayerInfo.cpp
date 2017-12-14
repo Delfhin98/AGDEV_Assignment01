@@ -15,7 +15,7 @@
 CPlayerInfo *CPlayerInfo::s_instance = 0;
 
 CPlayerInfo::CPlayerInfo(void)
-	: m_dSpeed(40.0)
+	: m_dSpeed(10.0)
 	, m_dAcceleration(10.0)
 	, m_bJumpUpwards(false)
 	, m_dJumpSpeed(10.0)
@@ -287,7 +287,7 @@ void CPlayerInfo::Update(double dt)
 	{
 		Vector3 viewVector = target - position;
 		Vector3 rightUV;
-		bool check = false;
+		bool check;
 		Vector3 tempPos = position;
 
 		if (KeyboardController::GetInstance()->IsKeyDown('W'))
@@ -297,7 +297,13 @@ void CPlayerInfo::Update(double dt)
 			{
 				if (!entity->HasCollider())
 					continue;
-				if (EntityManager::GetInstance()->pointToAABB(tempPos, entity))
+				
+				if (!EntityManager::GetInstance()->pointToAABB(tempPos, entity))
+				{
+					check = false;
+					break;
+				}
+				else
 					check = true;
 			}
 			if (check)
@@ -310,7 +316,12 @@ void CPlayerInfo::Update(double dt)
 			{
 				if (!entity->HasCollider())
 					continue;
-				if (EntityManager::GetInstance()->pointToAABB(tempPos, entity))
+				if (!EntityManager::GetInstance()->pointToAABB(tempPos, entity))
+				{
+					check = false;
+					break;
+				}
+				else
 					check = true;
 			}
 			if (check)
@@ -328,7 +339,12 @@ void CPlayerInfo::Update(double dt)
 			{
 				if (!entity->HasCollider())
 					continue;
-				if (EntityManager::GetInstance()->pointToAABB(tempPos, entity))
+				if (!EntityManager::GetInstance()->pointToAABB(tempPos, entity))
+				{
+					check = false;
+					break;
+				}
+				else
 					check = true;
 			}
 			if (check)
@@ -345,7 +361,12 @@ void CPlayerInfo::Update(double dt)
 			{
 				if (!entity->HasCollider())
 					continue;
-				if (EntityManager::GetInstance()->pointToAABB(tempPos, entity))
+				if (!EntityManager::GetInstance()->pointToAABB(tempPos, entity))
+				{
+					check = false;
+					break;
+				}
+				else
 					check = true;
 			}
 
