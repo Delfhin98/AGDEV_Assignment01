@@ -30,6 +30,7 @@ public:
 	void RenderWalls();
 	void RenderTurrets();
 	void RenderRobots();
+	void RenderSpatialPartitionObjects();
 
 	void SpawnRobots(float x, float y, float z);
 

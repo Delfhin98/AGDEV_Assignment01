@@ -123,12 +123,12 @@ void CAndroidRobot::Update(double dt)
 	if (position.z > 100.0f)
 	{
 		target.z = position.z * -1;
-		target.x = 50.0f;
+		target.x = defaultTarget.x;
 	}
 	else if (position.z < -100.0f)
 	{
 		target.z = position.z * -1;
-		target.x = 50.0f;
+		target.x = defaultTarget.x;
 	}
 }
 

@@ -244,57 +244,30 @@ void Assignment::Init()
 	RenderWalls();
 	RenderTurrets();
 	RenderRobots();
+	RenderSpatialPartitionObjects();
 
 	// Create entities into the scene
 	Create::Entity("reference", Vector3(0.0f, 0.0f, 0.0f), 99); // Reference
 	Create::Entity("lightball", Vector3(lights[0]->position.x, lights[0]->position.y, lights[0]->position.z), 99); // Lightball
 
-	//GenericEntity* aCube = Create::Entity("cube", Vector3(-20.0f, 0.0f, -20.0f),3);
-	//aCube->SetCollider(true);
-	//aCube->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
-	//aCube->InitLOD("cube", "sphere", "cubeSG");
+	GenericEntity* aCube = Create::Entity("cube", Vector3(-20.0f, 0.0f, -20.0f),3);
+	aCube->SetCollider(true);
+	aCube->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
+	aCube->InitLOD("cube", "sphere", "cubeSG");
 
-	//GenericEntity* aCube2 = Create::Entity("cube", Vector3(-10.0f, 0.0f, -20.0f),5);
-	//aCube2->SetScale(Vector3(2.f, 2.f, 2.f));
-	//aCube2->SetCollider(true);
-	//aCube2->SetAABB(Vector3(1.f, 1.0f, 1.0f), Vector3(-1.0f, -1.0f, -1.0f));
-	//aCube2->InitLOD("cube", "sphere", "cubeSG");
+	GenericEntity* aCube2 = Create::Entity("cube", Vector3(-10.0f, 0.0f, -20.0f),5);
+	aCube2->SetScale(Vector3(2.f, 2.f, 2.f));
+	aCube2->SetCollider(true);
+	aCube2->SetAABB(Vector3(1.f, 1.0f, 1.0f), Vector3(-1.0f, -1.0f, -1.0f));
+	aCube2->InitLOD("cube", "sphere", "cubeSG");
 
-	//// Add the pointer to this new entity to the Scene Graph
-	//CSceneNode* theNode = CSceneGraph::GetInstance()->AddNode(aCube);
-	//if (theNode == NULL)
-	//{
-	//	cout << "EntityManager::AddEntity: Unable to add to scene graph!" << endl;
-	//}
-
-	//GenericEntity* anotherCube = Create::Entity("cube", Vector3(-20.0f, 1.1f, -20.0f),3);
-	//anotherCube->SetCollider(true);
-	//anotherCube->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
-	//CSceneNode* anotherNode = theNode->AddChild(anotherCube);
-	//if (anotherNode == NULL)
-	//{
-	//	cout << "EntityManager::AddEntity: Unable to add to scene graph!" << endl;
-	//}
-
-	//GenericEntity* baseCube = Create::Asset("cube", Vector3(0.0f, 0.0f, 0.0f));
-	//CSceneNode* baseNode = CSceneGraph::GetInstance()->AddNode(baseCube);
-
-	//CUpdateTransformation* baseMtx = new CUpdateTransformation();
-	//baseMtx->ApplyUpdate(1.0f, 0.0f, 0.0f, 1.0f);
-	//baseMtx->SetSteps(-60, 60);
-	//baseNode->SetUpdateTransformation(baseMtx);
-
-	//GenericEntity* childCube = Create::Asset("cubeSG", Vector3(0.0f, 0.0f, 0.0f));
-	//CSceneNode* childNode = baseNode->AddChild(childCube);
-	//childNode->ApplyTranslate(0.0f, 1.0f, 0.0f);
-
-	//GenericEntity* grandchildCube = Create::Asset("cubeSG", Vector3(0.0f, 0.0f, 0.0f));
-	//CSceneNode* grandchildNode = childNode->AddChild(grandchildCube);
-	//grandchildNode->ApplyTranslate(0.0f, 0.0f, 1.0f);
-	//CUpdateTransformation* aRotateMtx = new CUpdateTransformation();
-	//aRotateMtx->ApplyUpdate(1.0f, 0.0f, 0.0f, 1.0f);
-	//aRotateMtx->SetSteps(-120, 60);
-	//grandchildNode->SetUpdateTransformation(aRotateMtx);
+	// Add the pointer to this new entity to the Scene Graph
+	CSceneNode* theNode = CSceneGraph::GetInstance()->AddNode(aCube);
+	CSceneNode* theNode2 = CSceneGraph::GetInstance()->AddNode(aCube2);
+	if (theNode == NULL)
+	{
+		cout << "EntityManager::AddEntity: Unable to add to scene graph!" << endl;
+	}
 
 	theRobot = new CAndroidRobot();
 	theRobot->Init();
@@ -562,6 +535,86 @@ void Assignment::RenderRobots()
 	RobotBase_03->SetScale(Vector3(20.f, 10.f, 20.f));
 
 	CSceneNode* theBase_03 = theSource_03->AddChild(RobotBase_03);
+}
+
+void Assignment::RenderSpatialPartitionObjects()
+{
+	float m_fPosY_Offset = -10.f;
+
+	// Turret 1 - Testing Spatial Partitioning w Grenade //
+	// Source
+	GenericEntity* TurretSource = Create::Entity("TurretSource_HighDef", Vector3(20.0f, m_fPosY_Offset + 3.5f, 120.0f),
+		Vector3(0.0f, 1.0f, 0.0f), 180.f, 1);
+	TurretSource->SetScale(Vector3(10.f, 10.f, 10.f));
+	TurretSource->InitLOD("TurretSource_HighDef", "TurretSource_MidDef", "TurretSource_LowDef");
+
+	CSceneNode* theNode = CSceneGraph::GetInstance()->AddNode(TurretSource);
+
+	// Base
+	GenericEntity* TurretBase = Create::Entity("TurretBase_HighDef", Vector3(20.0f, m_fPosY_Offset, 120.0f),
+		Vector3(0.0f, 1.0f, 0.0f), 180.f, 2);
+	TurretBase->SetScale(Vector3(20.f, 10.f, 20.f));
+	TurretBase->SetCollider(true);
+	TurretBase->SetAABB(Vector3(TurretBase->GetScale().x * 0.5f, TurretBase->GetScale().y * 0.5f, TurretBase->GetScale().z * 0.5f),
+		Vector3(TurretBase->GetScale().x * -0.5f, TurretBase->GetScale().y * -0.5f, TurretBase->GetScale().z * -0.5f));
+	TurretBase->InitLOD("TurretBase_HighDef", "TurretBase_MidDef", "TurretBase_LowDef");
+
+	CSceneNode* theChild_01 = theNode->AddChild(TurretBase);
+
+	// Stand 
+	GenericEntity* TurretStand = Create::Entity("TurretStand_HighDef", Vector3(20.0f, m_fPosY_Offset - 2.f, 120.0f)
+		, Vector3(0.0f, 1.0f, 0.0f), 180.f, 3);
+	TurretStand->SetScale(Vector3(10.f, 20.f, 10.f));
+	TurretStand->InitLOD("TurretStand_HighDef", "TurretStand_MidDef", "TurretStand_LowDef");
+
+	CSceneNode* theChild_02 = theNode->AddChild(TurretStand);
+
+	// Cursor
+	GenericEntity* TurretCursor = Create::Entity("TurretCursor_HighDef", Vector3(20.0f, m_fPosY_Offset, 120.0f)
+		, Vector3(0.0f, 1.0f, 0.0f), 180.f, 1);
+	TurretCursor->SetScale(Vector3(15.f, 15.f, 15.f));
+	TurretCursor->InitLOD("TurretCursor_HighDef", "TurretCursor_MidDef", "TurretCursor_LowDef");
+
+	CSceneNode* theChild_03 = theNode->AddChild(TurretCursor);
+
+
+
+	// Turret 2 - Testing Spatial Partitioning w Grenade //
+	// Source
+	GenericEntity* TurretSource_02 = Create::Entity("TurretSource_HighDef", Vector3(20.0f, m_fPosY_Offset + 3.5f, 80.0f),
+		Vector3(0.0f, 1.0f, 0.0f), 180.f, 1);
+	TurretSource_02->SetScale(Vector3(10.f, 10.f, 10.f));
+	TurretSource_02->InitLOD("TurretSource_HighDef", "TurretSource_MidDef", "TurretSource_LowDef");
+
+	CSceneNode* theNode_02 = CSceneGraph::GetInstance()->AddNode(TurretSource_02);
+
+	// Base
+	GenericEntity* TurretBase_02 = Create::Entity("TurretBase_HighDef", Vector3(20.0f, m_fPosY_Offset, 80.0f),
+		Vector3(0.0f, 1.0f, 0.0f), 180.f, 2);
+	TurretBase_02->SetScale(Vector3(20.f, 10.f, 20.f));
+	TurretBase_02->SetCollider(true);
+	TurretBase_02->SetAABB(Vector3(TurretBase_02->GetScale().x * 0.5f, TurretBase_02->GetScale().y * 0.5f, TurretBase_02->GetScale().z * 0.5f),
+		Vector3(TurretBase_02->GetScale().x * -0.5f, TurretBase_02->GetScale().y * -0.5f, TurretBase_02->GetScale().z * -0.5f));
+	TurretBase_02->InitLOD("TurretBase_HighDef", "TurretBase_MidDef", "TurretBase_LowDef");
+
+	CSceneNode* theChild_01_ = theNode_02->AddChild(TurretBase_02);
+
+	// Stand 
+	GenericEntity* TurretStand_02 = Create::Entity("TurretStand_HighDef", Vector3(20.0f, m_fPosY_Offset - 2.f, 80.0f)
+		, Vector3(0.0f, 1.0f, 0.0f), 180.f, 3);
+	TurretStand_02->SetScale(Vector3(10.f, 20.f, 10.f));
+	TurretStand_02->InitLOD("TurretStand_HighDef", "TurretStand_MidDef", "TurretStand_LowDef");
+
+	CSceneNode* theChild_02_ = theNode_02->AddChild(TurretStand_02);
+
+	// Cursor
+	GenericEntity* TurretCursor_02 = Create::Entity("TurretCursor_HighDef", Vector3(20.0f, m_fPosY_Offset, 80.0f)
+		, Vector3(0.0f, 1.0f, 0.0f), 180.f, 1);
+	TurretCursor_02->SetScale(Vector3(15.f, 15.f, 15.f));
+	TurretCursor_02->InitLOD("TurretCursor_HighDef", "TurretCursor_MidDef", "TurretCursor_LowDef");
+
+	CSceneNode* theChild_03_ = theNode_02->AddChild(TurretCursor_02);
+
 }
 
 void Assignment::SpawnRobots(float x, float y, float z)
