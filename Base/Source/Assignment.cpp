@@ -169,32 +169,32 @@ void Assignment::Init()
 	MeshBuilder::GetInstance()->GetMesh("Wall2")->textureID = LoadTGA("Image//Assignment//Wall_UV_TGA.tga");
 	// Turrets //
 	// Base
-	MeshBuilder::GetInstance()->GenerateOBJ("TurretBase_HighDef", "OBJ//Assignment//Turret_Base_OBJ.obj");
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretBase_HighDef", "OBJ//Assignment//Turret_Base2_OBJ.obj");
 	MeshBuilder::GetInstance()->GetMesh("TurretBase_HighDef")->textureID = LoadTGA("Image//Assignment//Turret_Base_UV_Texture_HighDef.tga");
-	MeshBuilder::GetInstance()->GenerateOBJ("TurretBase_MidDef", "OBJ//Assignment//Turret_Base_OBJ.obj");
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretBase_MidDef", "OBJ//Assignment//Turret_Base2_OBJ.obj");
 	MeshBuilder::GetInstance()->GetMesh("TurretBase_MidDef")->textureID = LoadTGA("Image//Assignment//Turret_Base_UV_Texture_MidDef.tga");
-	MeshBuilder::GetInstance()->GenerateOBJ("TurretBase_LowDef", "OBJ//Assignment//Turret_Base_OBJ.obj");
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretBase_LowDef", "OBJ//Assignment//Turret_Base2_OBJ.obj");
 	MeshBuilder::GetInstance()->GetMesh("TurretBase_LowDef")->textureID = LoadTGA("Image//Assignment//Turret_Base_UV_Texture_LowDef.tga");
 	// Stand
-	MeshBuilder::GetInstance()->GenerateOBJ("TurretStand_HighDef", "OBJ//Assignment//Turret_Stand_OBJ.obj");
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretStand_HighDef", "OBJ//Assignment//Turret_Stand2_OBJ.obj");
 	MeshBuilder::GetInstance()->GetMesh("TurretStand_HighDef")->textureID = LoadTGA("Image//Assignment//Turret_Stand_UV_Texture_HighDef.tga");
-	MeshBuilder::GetInstance()->GenerateOBJ("TurretStand_MidDef", "OBJ//Assignment//Turret_Stand_OBJ.obj");
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretStand_MidDef", "OBJ//Assignment//Turret_Stand2_OBJ.obj");
 	MeshBuilder::GetInstance()->GetMesh("TurretStand_MidDef")->textureID = LoadTGA("Image//Assignment//Turret_Stand_UV_Texture_MidDef.tga");
-	MeshBuilder::GetInstance()->GenerateOBJ("TurretStand_LowDef", "OBJ//Assignment//Turret_Stand_OBJ.obj");
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretStand_LowDef", "OBJ//Assignment//Turret_Stand2_OBJ.obj");
 	MeshBuilder::GetInstance()->GetMesh("TurretStand_LowDef")->textureID = LoadTGA("Image//Assignment//Turret_Stand_UV_Texture_LowDef.tga");
 	// Source
-	MeshBuilder::GetInstance()->GenerateOBJ("TurretSource_HighDef", "OBJ//Assignment//Turret_Source_OBJ.obj");
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretSource_HighDef", "OBJ//Assignment//Turret_Source2_OBJ.obj");
 	MeshBuilder::GetInstance()->GetMesh("TurretSource_HighDef")->textureID = LoadTGA("Image//Assignment//Turret_Source_UV_Texture_HighDef.tga");
-	MeshBuilder::GetInstance()->GenerateOBJ("TurretSource_MidDef", "OBJ//Assignment//Turret_Source_OBJ.obj");
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretSource_MidDef", "OBJ//Assignment//Turret_Source2_OBJ.obj");
 	MeshBuilder::GetInstance()->GetMesh("TurretSource_MidDef")->textureID = LoadTGA("Image//Assignment//Turret_Source_UV_Texture_MidDef.tga");
-	MeshBuilder::GetInstance()->GenerateOBJ("TurretSource_LowDef", "OBJ//Assignment//Turret_Source_OBJ.obj");
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretSource_LowDef", "OBJ//Assignment//Turret_Source2_OBJ.obj");
 	MeshBuilder::GetInstance()->GetMesh("TurretSource_LowDef")->textureID = LoadTGA("Image//Assignment//Turret_Source_UV_Texture_LowDef.tga");
 	// Target Cursor
-	MeshBuilder::GetInstance()->GenerateOBJ("TurretCursor_HighDef", "OBJ//Assignment//Turret_TargetCursor_OBJ.obj");
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretCursor_HighDef", "OBJ//Assignment//Turret_TargetCursor2_OBJ.obj");
 	MeshBuilder::GetInstance()->GetMesh("TurretCursor_HighDef")->textureID = LoadTGA("Image//Assignment//Turret_TargetCursor_UV_Texture_HighDef.tga");
-	MeshBuilder::GetInstance()->GenerateOBJ("TurretCursor_MidDef", "OBJ//Assignment//Turret_TargetCursor_OBJ.obj");
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretCursor_MidDef", "OBJ//Assignment//Turret_TargetCursor2_OBJ.obj");
 	MeshBuilder::GetInstance()->GetMesh("TurretCursor_MidDef")->textureID = LoadTGA("Image//Assignment//Turret_TargetCursor_UV_Texture_MidDef.tga");
-	MeshBuilder::GetInstance()->GenerateOBJ("TurretCursor_LowDef", "OBJ//Assignment//Turret_TargetCursor_OBJ.obj");
+	MeshBuilder::GetInstance()->GenerateOBJ("TurretCursor_LowDef", "OBJ//Assignment//Turret_TargetCursor2_OBJ.obj");
 	MeshBuilder::GetInstance()->GetMesh("TurretCursor_LowDef")->textureID = LoadTGA("Image//Assignment//Turret_TargetCursor_UV_Texture_LowDef.tga");
 	// Android Robots //
 	// Base
@@ -304,38 +304,43 @@ void Assignment::RenderWalls()
 	float m_fPosY_Offset = -10.f;
 
 	// Front Wall
-	GenericEntity* FrontWall = Create::Entity("Wall2", Vector3(200.0f, m_fPosY_Offset, 0.0f), 99);
+	GenericEntity* FrontWall = Create::Entity("Wall2", Vector3(200.0f, m_fPosY_Offset + 50.f, 0.0f), 99);
 	FrontWall->SetScale(Vector3(10.f, 50.f, 100.f));
 	FrontWall->SetCollider(true);
 	FrontWall->SetIsImmortal(true);
-	FrontWall->SetAABB(Vector3(2.f, 100.f, 200.f), Vector3(-2.f, -100.f, -200.f));
+	FrontWall->SetAABB(	Vector3(0.2f * FrontWall->GetScale().x, 1.f * FrontWall->GetScale().y, 2.f * FrontWall->GetScale().z),
+						Vector3(-(0.2f * FrontWall->GetScale().x), -(1.f * FrontWall->GetScale().y), -(2.f * FrontWall->GetScale().z)));
 
 	// Back Wall
-	GenericEntity* BackWall = Create::Entity("Wall2", Vector3(-200.0f, m_fPosY_Offset, 0.0f), 99);
+	GenericEntity* BackWall = Create::Entity("Wall2", Vector3(-200.0f, m_fPosY_Offset + 50.f, 0.0f), 99);
 	BackWall->SetScale(Vector3(10.f, 50.f, 100.f));
 	BackWall->SetCollider(true);
 	BackWall->SetIsImmortal(true);
-	BackWall->SetAABB(Vector3(2.f, 100.f, 200.f), Vector3(-2.f, -100.f, -200.f));
+	BackWall->SetAABB(	Vector3(0.2f * BackWall->GetScale().x, 1.f * BackWall->GetScale().y, 2.f * BackWall->GetScale().z),
+						Vector3(-(0.2f * BackWall->GetScale().x), -(1.f * BackWall->GetScale().y), -(2.f * BackWall->GetScale().z)));
 
 	// Right Wall
-	GenericEntity* RightWall = Create::Entity("Wall", Vector3(0.0f, m_fPosY_Offset, 200.0f), 99);
+	GenericEntity* RightWall = Create::Entity("Wall", Vector3(0.0f, m_fPosY_Offset + 50.f, 200.0f), 99);
 	RightWall->SetScale(Vector3(100.f, 50.f, 10.f));
 	RightWall->SetIsImmortal(true);
 	RightWall->SetCollider(true);
-	RightWall->SetAABB(Vector3(200.f, 100.f, 2.f), Vector3(-200.f, -100.f, -2.f));
+	RightWall->SetAABB(	Vector3(2.f * RightWall->GetScale().x, 1.f * RightWall->GetScale().y, 0.2f * RightWall->GetScale().z),
+						Vector3(-(2.f * RightWall->GetScale().x), -(1.f * RightWall->GetScale().y), -(0.2f * RightWall->GetScale().z)));
 
 	// Left Wall
-	GenericEntity* LeftWall = Create::Entity("Wall", Vector3(0.0f, m_fPosY_Offset, -200.0f), 99);
+	GenericEntity* LeftWall = Create::Entity("Wall", Vector3(0.0f, m_fPosY_Offset + 50.f, -200.0f), 99);
 	LeftWall->SetScale(Vector3(100.f, 50.f, 10.f));
 	LeftWall->SetIsImmortal(true);
 	LeftWall->SetCollider(true);
-	LeftWall->SetAABB(Vector3(200.f, 100.f, 2.f), Vector3(-200.f, -100.f, -2.f));
+	LeftWall->SetAABB(	Vector3(2.f * LeftWall->GetScale().x, 1.f * LeftWall->GetScale().y, 0.2f * LeftWall->GetScale().z),
+						Vector3(-(2.f * LeftWall->GetScale().x), -(1.f * LeftWall->GetScale().y), -(0.2f * LeftWall->GetScale().z)));
 
 	// Ceiling
-	GenericEntity* Ceiling = Create::Entity("Wall", Vector3(0.0f, 90.f, -200.0f), Vector3(1.f, 0.f, 0.f), 90.f, 99, Vector3(100.f, 200.f, 10.f));
+	GenericEntity* Ceiling = Create::Entity("Wall", Vector3(0.0f, 90.f, 0.0f), Vector3(1.f, 0.f, 0.f), 90.f, 99, Vector3(100.f, 200.f, 10.f));
 	Ceiling->SetIsImmortal(true);
 	Ceiling->SetCollider(true);
 }
+
 
 void Assignment::RenderTurrets()
 {
@@ -343,26 +348,35 @@ void Assignment::RenderTurrets()
 
 	// LOD - Non-Movable Turret //
 	// Source
-	GenericEntity* TurretSource = Create::Entity("TurretSource_HighDef", Vector3(20.0f, m_fPosY_Offset + 3.5f, -100.0f), 1);
+	GenericEntity* TurretSource = Create::Entity("TurretSource_HighDef", Vector3(20.0f, m_fPosY_Offset + 11.f, -100.0f), 1);
 	TurretSource->SetScale(Vector3(10.f, 10.f, 10.f));
+	TurretSource->SetCollider(true);
+	TurretSource->SetAABB(	Vector3(0.24f * TurretSource->GetScale().x * 0.5f, 0.24f * TurretSource->GetScale().y * 0.5f, 0.24f * TurretSource->GetScale().z * 0.5f),
+							Vector3(0.24f * TurretSource->GetScale().x * -0.5f, 0.24f * TurretSource->GetScale().y * -0.5f, 0.24f * TurretSource->GetScale().z * -0.5f));
 	TurretSource->InitLOD("TurretSource_HighDef", "TurretSource_MidDef", "TurretSource_LowDef");
 
 	// Base
-	GenericEntity* TurretBase = Create::Entity("TurretBase_HighDef", Vector3(20.0f, m_fPosY_Offset, -100.0f), 2);
+	GenericEntity* TurretBase = Create::Entity("TurretBase_HighDef", Vector3(20.0f, m_fPosY_Offset + 0.5f, -100.0f), 2);
 	TurretBase->SetScale(Vector3(20.f, 10.f, 20.f));
 	TurretBase->SetCollider(true);
-	TurretBase->SetAABB(Vector3(TurretBase->GetScale().x * 0.5f, TurretBase->GetScale().y * 0.5f, TurretBase->GetScale().z * 0.5f),
-		Vector3(TurretBase->GetScale().x * -0.5f, TurretBase->GetScale().y * -0.5f, TurretBase->GetScale().z * -0.5f));
+	TurretBase->SetAABB(	Vector3(0.5f * TurretBase->GetScale().x * 0.5f, 0.15f * TurretBase->GetScale().y * 0.5f, 0.5f * TurretBase->GetScale().z * 0.5f),
+							Vector3(0.5f * TurretBase->GetScale().x * -0.5f, 0.15f * TurretBase->GetScale().y * -0.5f, 0.5f * TurretBase->GetScale().z * -0.5f));
 	TurretBase->InitLOD("TurretBase_HighDef", "TurretBase_MidDef", "TurretBase_LowDef");
 
 	// Stand 
-	GenericEntity* TurretStand = Create::Entity("TurretStand_HighDef", Vector3(20.0f, m_fPosY_Offset - 2.f, -100.0f), 3);
+	GenericEntity* TurretStand = Create::Entity("TurretStand_HighDef", Vector3(20.0f, m_fPosY_Offset + 5.f, -100.0f), 3);
 	TurretStand->SetScale(Vector3(10.f, 20.f, 10.f));
+	TurretStand->SetCollider(true);
+	TurretStand->SetAABB(	Vector3(0.2f * TurretStand->GetScale().x * 0.5f, 0.5f * TurretStand->GetScale().y * 0.5f, 0.2f * TurretStand->GetScale().z * 0.5f),
+							Vector3(0.2f * TurretStand->GetScale().x * -0.5f, 0.5f * TurretStand->GetScale().y * -0.5f, 0.2f * TurretStand->GetScale().z * -0.5f));
 	TurretStand->InitLOD("TurretStand_HighDef", "TurretStand_MidDef", "TurretStand_LowDef");
 
 	// Cursor
-	GenericEntity* TurretCursor = Create::Entity("TurretCursor_HighDef", Vector3(20.0f, m_fPosY_Offset, -100.0f), 1);
+	GenericEntity* TurretCursor = Create::Entity("TurretCursor_HighDef", Vector3(20.0f, m_fPosY_Offset + 11.f, -100.f + 3.f), 1);
 	TurretCursor->SetScale(Vector3(15.f, 15.f, 15.f));
+	TurretCursor->SetCollider(true);
+	TurretCursor->SetAABB(	Vector3(0.3f * TurretCursor->GetScale().x * 0.5f, 0.3f * TurretCursor->GetScale().y * 0.5f, 0.2f *TurretCursor->GetScale().z * 0.5f),
+							Vector3(0.3f * TurretCursor->GetScale().x * -0.5f, 0.3f * TurretCursor->GetScale().y * -0.5f, 0.2f * TurretCursor->GetScale().z * -0.5f));
 	TurretCursor->InitLOD("TurretCursor_HighDef", "TurretCursor_MidDef", "TurretCursor_LowDef");
 
 
@@ -370,7 +384,7 @@ void Assignment::RenderTurrets()
 
 	// SceneGraph - Non-Movable Turret, Source (Parent) is moving thus the Cursor (Child) is moving too. //
 	// Source
-	GenericEntity* TurretSource_02 = Create::Asset("TurretSource_HighDef", Vector3(-120.0f, m_fPosY_Offset + 3.5f, -100.0f), 1);
+	GenericEntity* TurretSource_02 = Create::Asset("TurretSource_HighDef", Vector3(-120.0f, m_fPosY_Offset + 11.f, -100.0f), 1);
 	TurretSource_02->SetScale(Vector3(10.f, 10.f, 10.f));
 	TurretSource_02->InitLOD("TurretSource_HighDef", "TurretSource_MidDef", "TurretSource_LowDef");
 
@@ -381,7 +395,7 @@ void Assignment::RenderTurrets()
 	theSource_02->SetUpdateTransformation(baseMtx_02);
 
 	// Base
-	GenericEntity* TurretBase_02 = Create::Entity("TurretBase_HighDef", Vector3(-120.0f, m_fPosY_Offset, -100.0f), 2);
+	GenericEntity* TurretBase_02 = Create::Entity("TurretBase_HighDef", Vector3(-120.0f, m_fPosY_Offset + 0.5f, -100.0f), 2);
 	TurretBase_02->SetScale(Vector3(20.f, 10.f, 20.f));
 	TurretBase_02->SetCollider(true);
 	TurretBase_02->SetAABB(Vector3(TurretBase_02->GetScale().x * 0.5f, TurretBase_02->GetScale().y * 0.5f, TurretBase_02->GetScale().z * 0.5f),
@@ -389,12 +403,12 @@ void Assignment::RenderTurrets()
 	TurretBase_02->InitLOD("TurretBase_HighDef", "TurretBase_MidDef", "TurretBase_LowDef");
 
 	// Stand 
-	GenericEntity* TurretStand_02 = Create::Entity("TurretStand_HighDef", Vector3(-120.0f, m_fPosY_Offset - 2.f, -100.0f), 3);
+	GenericEntity* TurretStand_02 = Create::Entity("TurretStand_HighDef", Vector3(-120.0f, m_fPosY_Offset + 5.f, -100.0f), 3);
 	TurretStand_02->SetScale(Vector3(10.f, 20.f, 10.f));
 	TurretStand_02->InitLOD("TurretStand_HighDef", "TurretStand_MidDef", "TurretStand_LowDef");
 
 	// Cursor
-	GenericEntity* TurretCursor_02 = Create::Asset("TurretCursor_HighDef", Vector3(-120.0f, m_fPosY_Offset, -100.0f), 1);
+	GenericEntity* TurretCursor_02 = Create::Asset("TurretCursor_HighDef", Vector3(-120.0f, m_fPosY_Offset + 11.f, -100.0f + 3.f), 1);
 	TurretCursor_02->SetScale(Vector3(15.f, 15.f, 15.f));
 	TurretCursor_02->InitLOD("TurretCursor_HighDef", "TurretCursor_MidDef", "TurretCursor_LowDef");
 
@@ -404,7 +418,7 @@ void Assignment::RenderTurrets()
 
 	// SceneGraph - Non-Movable Turrets, Source (Parent) is moving while Cursor (Child) is moving on its own too. //
 	// Source
-	GenericEntity* TurretSource_03 = Create::Asset("TurretSource_HighDef", Vector3(-150.0f, m_fPosY_Offset + 3.5f, -100.0f), 1);
+	GenericEntity* TurretSource_03 = Create::Asset("TurretSource_HighDef", Vector3(-150.0f, m_fPosY_Offset + 11.f, -100.0f), 1);
 	TurretSource_03->SetScale(Vector3(10.f, 10.f, 10.f));
 	TurretSource_03->InitLOD("TurretSource_HighDef", "TurretSource_MidDef", "TurretSource_LowDef");
 
@@ -415,7 +429,7 @@ void Assignment::RenderTurrets()
 	theSource_03->SetUpdateTransformation(baseMtx_03);
 
 	// Base
-	GenericEntity* TurretBase_03 = Create::Entity("TurretBase_HighDef", Vector3(-150.0f, m_fPosY_Offset, -100.0f), 2);
+	GenericEntity* TurretBase_03 = Create::Entity("TurretBase_HighDef", Vector3(-150.0f, m_fPosY_Offset + 0.5f, -100.0f), 2);
 	TurretBase_03->SetScale(Vector3(20.f, 10.f, 20.f));
 	TurretBase_03->SetCollider(true);
 	TurretBase_03->SetAABB(Vector3(TurretBase_03->GetScale().x * 0.5f, TurretBase_03->GetScale().y * 0.5f, TurretBase_03->GetScale().z * 0.5f),
@@ -423,12 +437,12 @@ void Assignment::RenderTurrets()
 	TurretBase_03->InitLOD("TurretBase_HighDef", "TurretBase_MidDef", "TurretBase_LowDef");
 
 	// Stand 
-	GenericEntity* TurretStand_03 = Create::Entity("TurretStand_HighDef", Vector3(-150.0f, m_fPosY_Offset - 2.f, -100.0f), 3);
+	GenericEntity* TurretStand_03 = Create::Entity("TurretStand_HighDef", Vector3(-150.0f, m_fPosY_Offset + 5.f, -100.0f), 3);
 	TurretStand_03->SetScale(Vector3(10.f, 20.f, 10.f));
 	TurretStand_03->InitLOD("TurretStand_HighDef", "TurretStand_MidDef", "TurretStand_LowDef");
 
 	// Cursor
-	GenericEntity* TurretCursor_03 = Create::Asset("TurretCursor_HighDef", Vector3(-150.0f, m_fPosY_Offset, -100.0f), 1);
+	GenericEntity* TurretCursor_03 = Create::Asset("TurretCursor_HighDef", Vector3(-150.0f, m_fPosY_Offset + 11.f, -100.0f + 3.f), 1);
 	TurretCursor_03->SetScale(Vector3(15.f, 15.f, 15.f));
 	TurretCursor_03->InitLOD("TurretCursor_HighDef", "TurretCursor_MidDef", "TurretCursor_LowDef");
 
@@ -464,8 +478,8 @@ void Assignment::RenderRobots()
 	GenericEntity* RobotBase = Create::Entity("RobotBase_HighDef", Vector3(-20.0f, -10.f, -98.0f), 3);
 	RobotBase->SetScale(Vector3(20.f, 10.f, 20.f));
 	RobotBase->SetCollider(true);
-	RobotBase->SetAABB(Vector3(RobotBase->GetScale().x * 0.5f, RobotBase->GetScale().y * 0.5f, RobotBase->GetScale().z * 0.5f),
-		Vector3(RobotBase->GetScale().x * -0.5f, RobotBase->GetScale().y * -0.5f, RobotBase->GetScale().z * -0.5f));
+	RobotBase->SetAABB(Vector3(0.25f * RobotBase->GetScale().x, 0.2f * RobotBase->GetScale().y, 0.25f * RobotBase->GetScale().z),
+		Vector3(-(0.25f * RobotBase->GetScale().x), -(0.2f * RobotBase->GetScale().y), -(0.25f * RobotBase->GetScale().z)));
 	RobotBase->InitLOD("RobotBase_HighDef", "RobotBase_MidDef", "RobotBase_LowDef");
 
 
@@ -543,7 +557,7 @@ void Assignment::RenderSpatialPartitionObjects()
 
 	// Turret 1 - Testing Spatial Partitioning w Grenade //
 	// Source
-	GenericEntity* TurretSource = Create::Entity("TurretSource_HighDef", Vector3(20.0f, m_fPosY_Offset + 3.5f, 120.0f),
+	GenericEntity* TurretSource = Create::Entity("TurretSource_HighDef", Vector3(20.0f, m_fPosY_Offset + 11.f, 120.0f),
 		Vector3(0.0f, 1.0f, 0.0f), 180.f, 1);
 	TurretSource->SetScale(Vector3(10.f, 10.f, 10.f));
 	TurretSource->InitLOD("TurretSource_HighDef", "TurretSource_MidDef", "TurretSource_LowDef");
@@ -551,7 +565,7 @@ void Assignment::RenderSpatialPartitionObjects()
 	CSceneNode* theNode = CSceneGraph::GetInstance()->AddNode(TurretSource);
 
 	// Base
-	GenericEntity* TurretBase = Create::Entity("TurretBase_HighDef", Vector3(20.0f, m_fPosY_Offset, 120.0f),
+	GenericEntity* TurretBase = Create::Entity("TurretBase_HighDef", Vector3(20.0f, m_fPosY_Offset + 0.5f, 120.0f),
 		Vector3(0.0f, 1.0f, 0.0f), 180.f, 2);
 	TurretBase->SetScale(Vector3(20.f, 10.f, 20.f));
 	TurretBase->SetCollider(true);
@@ -562,7 +576,7 @@ void Assignment::RenderSpatialPartitionObjects()
 	CSceneNode* theChild_01 = theNode->AddChild(TurretBase);
 
 	// Stand 
-	GenericEntity* TurretStand = Create::Entity("TurretStand_HighDef", Vector3(20.0f, m_fPosY_Offset - 2.f, 120.0f)
+	GenericEntity* TurretStand = Create::Entity("TurretStand_HighDef", Vector3(20.0f, m_fPosY_Offset + 5.f, 120.0f)
 		, Vector3(0.0f, 1.0f, 0.0f), 180.f, 3);
 	TurretStand->SetScale(Vector3(10.f, 20.f, 10.f));
 	TurretStand->InitLOD("TurretStand_HighDef", "TurretStand_MidDef", "TurretStand_LowDef");
@@ -570,7 +584,7 @@ void Assignment::RenderSpatialPartitionObjects()
 	CSceneNode* theChild_02 = theNode->AddChild(TurretStand);
 
 	// Cursor
-	GenericEntity* TurretCursor = Create::Entity("TurretCursor_HighDef", Vector3(20.0f, m_fPosY_Offset, 120.0f)
+	GenericEntity* TurretCursor = Create::Entity("TurretCursor_HighDef", Vector3(20.0f, m_fPosY_Offset + 11.f, 120.0f - 3.f)
 		, Vector3(0.0f, 1.0f, 0.0f), 180.f, 1);
 	TurretCursor->SetScale(Vector3(15.f, 15.f, 15.f));
 	TurretCursor->InitLOD("TurretCursor_HighDef", "TurretCursor_MidDef", "TurretCursor_LowDef");
@@ -581,7 +595,7 @@ void Assignment::RenderSpatialPartitionObjects()
 
 	// Turret 2 - Testing Spatial Partitioning w Grenade //
 	// Source
-	GenericEntity* TurretSource_02 = Create::Entity("TurretSource_HighDef", Vector3(20.0f, m_fPosY_Offset + 3.5f, 80.0f),
+	GenericEntity* TurretSource_02 = Create::Entity("TurretSource_HighDef", Vector3(20.0f, m_fPosY_Offset + 11.f, 80.0f),
 		Vector3(0.0f, 1.0f, 0.0f), 180.f, 1);
 	TurretSource_02->SetScale(Vector3(10.f, 10.f, 10.f));
 	TurretSource_02->InitLOD("TurretSource_HighDef", "TurretSource_MidDef", "TurretSource_LowDef");
@@ -589,7 +603,7 @@ void Assignment::RenderSpatialPartitionObjects()
 	CSceneNode* theNode_02 = CSceneGraph::GetInstance()->AddNode(TurretSource_02);
 
 	// Base
-	GenericEntity* TurretBase_02 = Create::Entity("TurretBase_HighDef", Vector3(20.0f, m_fPosY_Offset, 80.0f),
+	GenericEntity* TurretBase_02 = Create::Entity("TurretBase_HighDef", Vector3(20.0f, m_fPosY_Offset + 0.5f, 80.0f),
 		Vector3(0.0f, 1.0f, 0.0f), 180.f, 2);
 	TurretBase_02->SetScale(Vector3(20.f, 10.f, 20.f));
 	TurretBase_02->SetCollider(true);
@@ -600,7 +614,7 @@ void Assignment::RenderSpatialPartitionObjects()
 	CSceneNode* theChild_01_ = theNode_02->AddChild(TurretBase_02);
 
 	// Stand 
-	GenericEntity* TurretStand_02 = Create::Entity("TurretStand_HighDef", Vector3(20.0f, m_fPosY_Offset - 2.f, 80.0f)
+	GenericEntity* TurretStand_02 = Create::Entity("TurretStand_HighDef", Vector3(20.0f, m_fPosY_Offset + 5.f, 80.0f)
 		, Vector3(0.0f, 1.0f, 0.0f), 180.f, 3);
 	TurretStand_02->SetScale(Vector3(10.f, 20.f, 10.f));
 	TurretStand_02->InitLOD("TurretStand_HighDef", "TurretStand_MidDef", "TurretStand_LowDef");
@@ -608,7 +622,7 @@ void Assignment::RenderSpatialPartitionObjects()
 	CSceneNode* theChild_02_ = theNode_02->AddChild(TurretStand_02);
 
 	// Cursor
-	GenericEntity* TurretCursor_02 = Create::Entity("TurretCursor_HighDef", Vector3(20.0f, m_fPosY_Offset, 80.0f)
+	GenericEntity* TurretCursor_02 = Create::Entity("TurretCursor_HighDef", Vector3(20.0f, m_fPosY_Offset + 11.f, 80.0f - 3.f)
 		, Vector3(0.0f, 1.0f, 0.0f), 180.f, 1);
 	TurretCursor_02->SetScale(Vector3(15.f, 15.f, 15.f));
 	TurretCursor_02->InitLOD("TurretCursor_HighDef", "TurretCursor_MidDef", "TurretCursor_LowDef");
@@ -623,16 +637,16 @@ void Assignment::SpawnRobots(float x, float y, float z)
 	GenericEntity* RobotHead = Create::Entity("RobotHead_HighDef", Vector3(0.f + x, 5.f + y, 0.f + z), 1);
 	RobotHead->SetScale(Vector3(15.f, 15.f, 15.f));
 	RobotHead->SetCollider(true);
-	RobotHead->SetAABB(Vector3(0.25f * RobotHead->GetScale().x, 0.25f * RobotHead->GetScale().y, 0.25f * RobotHead->GetScale().z),
-		Vector3(-(0.25f * RobotHead->GetScale().x), -(0.25f * RobotHead->GetScale().y), -(0.25f * RobotHead->GetScale().z)));
+	RobotHead->SetAABB(Vector3(0.125f * RobotHead->GetScale().x, 0.125f * RobotHead->GetScale().y, 0.125f * RobotHead->GetScale().z),
+		Vector3(-(0.125f * RobotHead->GetScale().x), -(0.125f * RobotHead->GetScale().y), -(0.125f * RobotHead->GetScale().z)));
 	RobotHead->InitLOD("RobotHead_HighDef", "RobotHead_MidDef", "RobotHead_LowDef");
 
 	// Body 
 	GenericEntity* RobotBody = Create::Entity("RobotBody_HighDef", Vector3(0.f + x, -2.f + y, 0.0f + z), 3);
 	RobotBody->SetScale(Vector3(15.f, 20.f, 15.f));
 	RobotBody->SetCollider(true);
-	RobotBody->SetAABB(Vector3(0.4f * RobotBody->GetScale().x, 0.5 * RobotBody->GetScale().y, 0.25 * RobotBody->GetScale().z),
-		Vector3(-(0.4f * RobotBody->GetScale().x), -(0.5 * RobotBody->GetScale().y), -(0.25 * RobotBody->GetScale().z)));
+	RobotBody->SetAABB(Vector3(0.2f * RobotBody->GetScale().x, 0.25f * RobotBody->GetScale().y, 0.125f * RobotBody->GetScale().z),
+		Vector3(-(0.2f * RobotBody->GetScale().x), -(0.25 * RobotBody->GetScale().y), -(0.125 * RobotBody->GetScale().z)));
 	RobotBody->InitLOD("RobotBody_HighDef", "RobotBody_MidDef", "RobotBody_LowDef");
 
 	// Hands
@@ -644,8 +658,8 @@ void Assignment::SpawnRobots(float x, float y, float z)
 	GenericEntity* RobotBase = Create::Entity("RobotBase_HighDef", Vector3(0.f + x, -10.f + y, 0.0f + z), 3);
 	RobotBase->SetScale(Vector3(20.f, 10.f, 20.f));
 	RobotBase->SetCollider(true);
-	RobotBase->SetAABB(Vector3(0.5f * RobotBase->GetScale().x, 0.4f * RobotBase->GetScale().y, 0.5f * RobotBase->GetScale().z),
-		Vector3(-(0.5f * RobotBase->GetScale().x), -(0.4f * RobotBase->GetScale().y), -(0.5f * RobotBase->GetScale().z)));
+	RobotBase->SetAABB(Vector3(0.25f * RobotBase->GetScale().x, 0.2f * RobotBase->GetScale().y, 0.25f * RobotBase->GetScale().z),
+		Vector3(-(0.25f * RobotBase->GetScale().x), -(0.2f * RobotBase->GetScale().y), -(0.25f * RobotBase->GetScale().z)));
 	RobotBase->InitLOD("RobotBase_HighDef", "RobotBase_MidDef", "RobotBase_LowDef");
 
 	CSceneNode* headNode = CSceneGraph::GetInstance()->AddNode(RobotHead);
