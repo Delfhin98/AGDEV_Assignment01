@@ -377,17 +377,20 @@ void Assignment::RenderTurrets()
 	TurretCursor->SetScale(Vector3(15.f, 15.f, 15.f));
 	TurretCursor->InitLOD("TurretCursor_HighDef", "TurretCursor_MidDef", "TurretCursor_LowDef");
 	
+
+
+
 	// SceneGraph - Non-Movable Turret, Source (Parent) is moving thus the Cursor (Child) is moving too. //
 	// Source
 	GenericEntity* TurretSource_02 = Create::Asset("TurretSource_HighDef", Vector3(-120.0f, m_fPosY_Offset + 3.5f, -100.0f));
 	TurretSource_02->SetScale(Vector3(10.f, 10.f, 10.f));
 	TurretSource_02->InitLOD("TurretSource_HighDef", "TurretSource_MidDef", "TurretSource_LowDef");
 
-	CSceneNode* theSource = CSceneGraph::GetInstance()->AddNode(TurretSource_02);
-	CUpdateTransformation* baseMtx = new CUpdateTransformation();
-	baseMtx->ApplyUpdate(0.0f, 0.01f, 0.0f);
-	baseMtx->SetSteps(-40, 40);
-	theSource->SetUpdateTransformation(baseMtx);
+	CSceneNode* theSource_02 = CSceneGraph::GetInstance()->AddNode(TurretSource_02);
+	CUpdateTransformation* baseMtx_02 = new CUpdateTransformation();
+	baseMtx_02->ApplyUpdate(0.0f, 0.01f, 0.0f);
+	baseMtx_02->SetSteps(-40, 40);
+	theSource_02->SetUpdateTransformation(baseMtx_02);
 
 	// Base
 	GenericEntity* TurretBase_02 = Create::Entity("TurretBase_HighDef", Vector3(-120.0f, m_fPosY_Offset, -100.0f));
@@ -407,7 +410,46 @@ void Assignment::RenderTurrets()
 	TurretCursor_02->SetScale(Vector3(15.f, 15.f, 15.f));
 	TurretCursor_02->InitLOD("TurretCursor_HighDef", "TurretCursor_MidDef", "TurretCursor_LowDef");
 
-	CSceneNode* theCursor = theSource->AddChild(TurretCursor_02);
+	CSceneNode* theCursor_02 = theSource_02->AddChild(TurretCursor_02);
+
+
+
+	// SceneGraph - Non-Movable Turrets, Source (Parent) is moving while Cursor (Child) is moving on its own too. //
+	// Source
+	GenericEntity* TurretSource_03 = Create::Asset("TurretSource_HighDef", Vector3(-150.0f, m_fPosY_Offset + 3.5f, -100.0f));
+	TurretSource_03->SetScale(Vector3(10.f, 10.f, 10.f));
+	TurretSource_03->InitLOD("TurretSource_HighDef", "TurretSource_MidDef", "TurretSource_LowDef");
+
+	CSceneNode* theSource_03 = CSceneGraph::GetInstance()->AddNode(TurretSource_03);
+	CUpdateTransformation* baseMtx_03 = new CUpdateTransformation();
+	baseMtx_03->ApplyUpdate(0.0f, 0.01f, 0.0f);
+	baseMtx_03->SetSteps(-40, 40);
+	theSource_03->SetUpdateTransformation(baseMtx_03);
+
+	// Base
+	GenericEntity* TurretBase_03 = Create::Entity("TurretBase_HighDef", Vector3(-150.0f, m_fPosY_Offset, -100.0f));
+	TurretBase_03->SetScale(Vector3(20.f, 10.f, 20.f));
+	TurretBase_03->SetCollider(true);
+	TurretBase_03->SetAABB(Vector3(TurretBase_03->GetScale().x * 0.5f, TurretBase_03->GetScale().y * 0.5f, TurretBase_03->GetScale().z * 0.5f),
+		Vector3(TurretBase_03->GetScale().x * -0.5f, TurretBase_03->GetScale().y * -0.5f, TurretBase_03->GetScale().z * -0.5f));
+	TurretBase_03->InitLOD("TurretBase_HighDef", "TurretBase_MidDef", "TurretBase_LowDef");
+
+	// Stand 
+	GenericEntity* TurretStand_03 = Create::Entity("TurretStand_HighDef", Vector3(-150.0f, m_fPosY_Offset - 2.f, -100.0f));
+	TurretStand_03->SetScale(Vector3(10.f, 20.f, 10.f));
+	TurretStand_03->InitLOD("TurretStand_HighDef", "TurretStand_MidDef", "TurretStand_LowDef");
+
+	// Cursor
+	GenericEntity* TurretCursor_03 = Create::Asset("TurretCursor_HighDef", Vector3(-150.0f, m_fPosY_Offset, -100.0f));
+	TurretCursor_03->SetScale(Vector3(15.f, 15.f, 15.f));
+	TurretCursor_03->InitLOD("TurretCursor_HighDef", "TurretCursor_MidDef", "TurretCursor_LowDef");
+
+	CSceneNode* theCursor_03 = theSource_03->AddChild(TurretCursor_03);
+	CUpdateTransformation* rotateMtx_03 = new CUpdateTransformation();
+	rotateMtx_03->ApplyUpdate(0.01f, 0.05f, 0.05f, 0.05f);
+	rotateMtx_03->SetSteps(-60, 60);
+	theCursor_03->SetUpdateTransformation(rotateMtx_03);
+
 }
 
 void Assignment::RenderRobots()
@@ -440,48 +482,71 @@ void Assignment::RenderRobots()
 
 
 
-	//// Robot 2 - SceneGraph; Moving Robot back and forth in a Straight Line//
-	//// Head - Source
-	//GenericEntity* RobotHead_02 = Create::Asset("RobotHead_HighDef", Vector3(-80.0f, m_fPosY_Offset - 2.f, -100.0f));
-	////RobotHead_02->SetCollider(true);
-	//RobotHead_02->SetScale(Vector3(15.f, 15.f, 15.f));
-	////RobotHead_02->InitLOD("RobotHead_HighDef", "RobotHead_MidDef", "RobotHead_LowDef");
 
-	//CSceneNode* theSource_02 = CSceneGraph::GetInstance()->AddNode(RobotHead_02);
+	// Robot 2 - SceneGraph; The Source (Head) is the parent & the rest are children. Only parent is moving. //
+	// Head - Source
+	GenericEntity* RobotHead_02 = Create::Asset("RobotHead_HighDef", Vector3(-80.0f, m_fPosY_Offset - 2.f, -100.0f));
+	RobotHead_02->SetScale(Vector3(15.f, 15.f, 15.f));
 
-	//CUpdateTransformation* theBaseMtx = new CUpdateTransformation();
-	//theBaseMtx->ApplyUpdate(0.0f, 0.0f, 0.1f);
-	//theBaseMtx->SetSteps(0, 200);
-	//theSource_02->SetUpdateTransformation(theBaseMtx);
+	CSceneNode* theSource_02 = CSceneGraph::GetInstance()->AddNode(RobotHead_02);
 
-	//// Body 
-	//GenericEntity* RobotBody_02 = Create::Asset("RobotBody_HighDef", Vector3(-80.0f, m_fPosY_Offset - 7.f, -100.0f));
-	////RobotBody_02->SetCollider(true);
-	//RobotBody_02->SetScale(Vector3(15.f, 20.f, 15.f));
-	////RobotBody_02->InitLOD("RobotBody_HighDef", "RobotBody_MidDef", "RobotBody_LowDef");
+	CUpdateTransformation* theBaseMtx_02 = new CUpdateTransformation();
+	theBaseMtx_02->ApplyUpdate(0.0f, 0.0f, 0.1f);
+	theBaseMtx_02->SetSteps(0, 200);
+	theSource_02->SetUpdateTransformation(theBaseMtx_02);
 
-	//CSceneNode* theBody_02 = theSource_02->AddChild(RobotBody_02);
+	// Body 
+	GenericEntity* RobotBody_02 = Create::Asset("RobotBody_HighDef", Vector3(-80.0f, m_fPosY_Offset - 7.f, -100.0f));
+	RobotBody_02->SetScale(Vector3(15.f, 20.f, 15.f));
 
-	//// Hands
-	//GenericEntity* RobotHands_02 = Create::Asset("RobotHands_HighDef", Vector3(-80.0f, m_fPosY_Offset, -95.0f));
-	////RobotHands_02->SetCollider(true);
-	//RobotHands_02->SetScale(Vector3(10.f, 10.f, 10.f));
-	////RobotHands_02->InitLOD("RobotHands_HighDef", "RobotHands_MidDef", "RobotHands_LowDef");
+	CSceneNode* theBody_02 = theSource_02->AddChild(RobotBody_02);
 
-	//CSceneNode* theHands_02 = theSource_02->AddChild(RobotHands_02);
+	// Hands
+	GenericEntity* RobotHands_02 = Create::Asset("RobotHands_HighDef", Vector3(-80.0f, m_fPosY_Offset, -95.0f));
+	RobotHands_02->SetScale(Vector3(10.f, 10.f, 10.f));
 
-	//CUpdateTransformation *theChildMtx = new CUpdateTransformation();
-	//theChildMtx->ApplyUpdate(0.01f, 0.0f, 0.0f);
-	//theChildMtx->SetSteps(-5, 5);
-	//theHands_02->SetUpdateTransformation(theChildMtx);
+	CSceneNode* theHands_02 = theSource_02->AddChild(RobotHands_02);
 
-	//// Base
-	//GenericEntity* RobotBase_02 = Create::Asset("RobotBase_HighDef", Vector3(-80.0f, m_fPosY_Offset, -100.0f));
-	////RobotBase_02->SetCollider(true);
-	//RobotBase_02->SetScale(Vector3(20.f, 10.f, 20.f));
-	////RobotBase_02->InitLOD("RobotBase_HighDef", "RobotBase_MidDef", "RobotBase_LowDef");
+	// Base
+	GenericEntity* RobotBase_02 = Create::Asset("RobotBase_HighDef", Vector3(-80.0f, m_fPosY_Offset, -100.0f));
+	RobotBase_02->SetScale(Vector3(20.f, 10.f, 20.f));
 
-	//CSceneNode* theBase_02 = theSource_02->AddChild(RobotBase_02);
+	CSceneNode* theBase_02 = theSource_02->AddChild(RobotBase_02);
+
+
+
+	// Robot 3 - SceneGraph; The Source (Head) is the parent & the rest are children. Parent is moving while a child (Hands) is moving too.//
+	// Head - Source
+	GenericEntity* RobotHead_03 = Create::Asset("RobotHead_HighDef", Vector3(-60.0f, m_fPosY_Offset - 2.f, -100.0f));
+	RobotHead_03->SetScale(Vector3(15.f, 15.f, 15.f));
+
+	CSceneNode* theSource_03 = CSceneGraph::GetInstance()->AddNode(RobotHead_03);
+	CUpdateTransformation* theBaseMtx_03 = new CUpdateTransformation();
+	theBaseMtx_03->ApplyUpdate(0.0f, 0.0f, 0.1f);
+	theBaseMtx_03->SetSteps(0, 200);
+	theSource_03->SetUpdateTransformation(theBaseMtx_03);
+
+	// Body 
+	GenericEntity* RobotBody_03 = Create::Asset("RobotBody_HighDef", Vector3(-60.0f, m_fPosY_Offset - 7.f, -100.0f));
+	RobotBody_03->SetScale(Vector3(15.f, 20.f, 15.f));
+
+	CSceneNode* theBody_03 = theSource_03->AddChild(RobotBody_03);
+
+	// Hands
+	GenericEntity* RobotHands_03 = Create::Asset("RobotHands_HighDef", Vector3(-60.0f, m_fPosY_Offset, -95.0f));
+	RobotHands_03->SetScale(Vector3(10.f, 10.f, 10.f));
+
+	CSceneNode* theHands_03 = theSource_03->AddChild(RobotHands_03);
+	CUpdateTransformation* theChildMtx_03 = new CUpdateTransformation();
+	theChildMtx_03->ApplyUpdate(0.1f, 0.0f, 0.0f);
+	theChildMtx_03->SetSteps(-10, 10);
+	theHands_03->SetUpdateTransformation(theChildMtx_03);
+
+	// Base
+	GenericEntity* RobotBase_03 = Create::Asset("RobotBase_HighDef", Vector3(-60.0f, m_fPosY_Offset, -100.0f));
+	RobotBase_03->SetScale(Vector3(20.f, 10.f, 20.f));
+
+	CSceneNode* theBase_03 = theSource_03->AddChild(RobotBase_03);
 }
 
 void Assignment::Update(double dt)
