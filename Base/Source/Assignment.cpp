@@ -376,6 +376,31 @@ void Assignment::RenderTurrets()
 	TurretCursor->SetScale(Vector3(15.f, 15.f, 15.f));
 	TurretCursor->InitLOD("TurretCursor_HighDef", "TurretCursor_MidDef", "TurretCursor_LowDef");
 	
+	// SceneGraph - Non-Movable Turret, Cursor moving only //
+	// Source
+	GenericEntity* TurretSource_02 = Create::Entity("TurretSource_HighDef", Vector3(-120.0f, m_fPosY_Offset + 3.5f, -100.0f));
+	TurretSource_02->SetScale(Vector3(10.f, 10.f, 10.f));
+	TurretSource_02->InitLOD("TurretSource_HighDef", "TurretSource_MidDef", "TurretSource_LowDef");
+
+	CSceneNode* theSource = CSceneGraph::GetInstance()->AddNode(TurretSource_02);
+
+	// Base
+	GenericEntity* TurretBase_02 = Create::Entity("TurretBase_HighDef", Vector3(-120.0f, m_fPosY_Offset, -100.0f));
+	TurretBase_02->SetScale(Vector3(20.f, 10.f, 20.f));
+	TurretBase_02->SetCollider(true);
+	TurretBase_02->SetAABB(Vector3(TurretBase_02->GetScale().x * 0.5f, TurretBase_02->GetScale().y * 0.5f, TurretBase_02->GetScale().z * 0.5f),
+		Vector3(TurretBase_02->GetScale().x * -0.5f, TurretBase_02->GetScale().y * -0.5f, TurretBase_02->GetScale().z * -0.5f));
+	TurretBase_02->InitLOD("TurretBase_HighDef", "TurretBase_MidDef", "TurretBase_LowDef");
+
+	// Stand 
+	GenericEntity* TurretStand_02 = Create::Entity("TurretStand_HighDef", Vector3(-120.0f, m_fPosY_Offset - 2.f, -100.0f));
+	TurretStand_02->SetScale(Vector3(10.f, 20.f, 10.f));
+	TurretStand_02->InitLOD("TurretStand_HighDef", "TurretStand_MidDef", "TurretStand_LowDef");
+
+	// Cursor
+	GenericEntity* TurretCursor_02 = Create::Entity("TurretCursor_HighDef", Vector3(-120.0f, m_fPosY_Offset, -100.0f));
+	TurretCursor_02->SetScale(Vector3(15.f, 15.f, 15.f));
+	TurretCursor_02->InitLOD("TurretCursor_HighDef", "TurretCursor_MidDef", "TurretCursor_LowDef");
 }
 
 void Assignment::RenderRobots()
