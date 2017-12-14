@@ -324,14 +324,15 @@ void Assignment::RenderWalls()
 	GenericEntity* FrontWall = Create::Entity("Wall", Vector3(0.0f, m_fPosY_Offset, -200.0f));
 	FrontWall->SetScale(Vector3(100.f, 50.f, 10.f));
 	FrontWall->SetCollider(true);
-	FrontWall->SetAABB(Vector3(FrontWall->GetScale().x * 0.5f, FrontWall->GetScale().y * 0.5f, FrontWall->GetScale().z * 0.5f),
-		Vector3(FrontWall->GetScale().x * -0.5f, FrontWall->GetScale().y * -0.5f, FrontWall->GetScale().z * -0.5f));
+	FrontWall->SetAABB(Vector3(FrontWall->GetScale().x, FrontWall->GetScale().y, FrontWall->GetScale().z),
+		Vector3(FrontWall->GetScale().x * -1.f, FrontWall->GetScale().y * -1.f, FrontWall->GetScale().z * -1.f));
 
 	// Back Wall
 	GenericEntity* BackWall = Create::Entity("Wall", Vector3(0.0f, m_fPosY_Offset, 200.0f));
 	BackWall->SetScale(Vector3(100.f, 50.f, 10.f));
 	BackWall->SetCollider(true);
-	BackWall->SetAABB(Vector3(50.f, 25.f, 5.f), Vector3(-50.f, -25.f, -5.f));
+	BackWall->SetAABB(Vector3(BackWall->GetScale().x * 0.5f, BackWall->GetScale().y * 0.5f, BackWall->GetScale().z * 0.5f),
+		Vector3(BackWall->GetScale().x * -0.5f, BackWall->GetScale().y * -0.5f, BackWall->GetScale().z * -0.5f));
 
 	// Right Wall
 	GenericEntity* RightWall = Create::Entity("Wall", Vector3(200.0f, m_fPosY_Offset, 0.0f), Vector3(0.f, 1.f, 0.f), 90.f, Vector3(100.f, 50.f, 10.f));
@@ -376,13 +377,17 @@ void Assignment::RenderTurrets()
 	TurretCursor->SetScale(Vector3(15.f, 15.f, 15.f));
 	TurretCursor->InitLOD("TurretCursor_HighDef", "TurretCursor_MidDef", "TurretCursor_LowDef");
 	
-	// SceneGraph - Non-Movable Turret, Cursor moving only //
+	// SceneGraph - Non-Movable Turret, Source (Parent) is moving thus the Cursor (Child) is moving too. //
 	// Source
-	GenericEntity* TurretSource_02 = Create::Entity("TurretSource_HighDef", Vector3(-120.0f, m_fPosY_Offset + 3.5f, -100.0f));
+	GenericEntity* TurretSource_02 = Create::Asset("TurretSource_HighDef", Vector3(-120.0f, m_fPosY_Offset + 3.5f, -100.0f));
 	TurretSource_02->SetScale(Vector3(10.f, 10.f, 10.f));
 	TurretSource_02->InitLOD("TurretSource_HighDef", "TurretSource_MidDef", "TurretSource_LowDef");
 
 	CSceneNode* theSource = CSceneGraph::GetInstance()->AddNode(TurretSource_02);
+	CUpdateTransformation* baseMtx = new CUpdateTransformation();
+	baseMtx->ApplyUpdate(0.0f, 0.01f, 0.0f);
+	baseMtx->SetSteps(-40, 40);
+	theSource->SetUpdateTransformation(baseMtx);
 
 	// Base
 	GenericEntity* TurretBase_02 = Create::Entity("TurretBase_HighDef", Vector3(-120.0f, m_fPosY_Offset, -100.0f));
@@ -398,9 +403,11 @@ void Assignment::RenderTurrets()
 	TurretStand_02->InitLOD("TurretStand_HighDef", "TurretStand_MidDef", "TurretStand_LowDef");
 
 	// Cursor
-	GenericEntity* TurretCursor_02 = Create::Entity("TurretCursor_HighDef", Vector3(-120.0f, m_fPosY_Offset, -100.0f));
+	GenericEntity* TurretCursor_02 = Create::Asset("TurretCursor_HighDef", Vector3(-120.0f, m_fPosY_Offset, -100.0f));
 	TurretCursor_02->SetScale(Vector3(15.f, 15.f, 15.f));
 	TurretCursor_02->InitLOD("TurretCursor_HighDef", "TurretCursor_MidDef", "TurretCursor_LowDef");
+
+	CSceneNode* theCursor = theSource->AddChild(TurretCursor_02);
 }
 
 void Assignment::RenderRobots()
