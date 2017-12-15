@@ -250,25 +250,6 @@ void Assignment::Init()
 	Create::Entity("reference", Vector3(0.0f, 0.0f, 0.0f), 99); // Reference
 	Create::Entity("lightball", Vector3(lights[0]->position.x, lights[0]->position.y, lights[0]->position.z), 99); // Lightball
 
-	GenericEntity* aCube = Create::Entity("cube", Vector3(-20.0f, 0.0f, -20.0f),3);
-	aCube->SetCollider(true);
-	aCube->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
-	aCube->InitLOD("cube", "sphere", "cubeSG");
-
-	GenericEntity* aCube2 = Create::Entity("cube", Vector3(-10.0f, 0.0f, -20.0f),5);
-	aCube2->SetScale(Vector3(2.f, 2.f, 2.f));
-	aCube2->SetCollider(true);
-	aCube2->SetAABB(Vector3(1.f, 1.0f, 1.0f), Vector3(-1.0f, -1.0f, -1.0f));
-	aCube2->InitLOD("cube", "sphere", "cubeSG");
-
-	// Add the pointer to this new entity to the Scene Graph
-	CSceneNode* theNode = CSceneGraph::GetInstance()->AddNode(aCube);
-	CSceneNode* theNode2 = CSceneGraph::GetInstance()->AddNode(aCube2);
-	if (theNode == NULL)
-	{
-		cout << "EntityManager::AddEntity: Unable to add to scene graph!" << endl;
-	}
-
 	theRobot = new CAndroidRobot();
 	theRobot->Init();
 
