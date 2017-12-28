@@ -16,6 +16,7 @@
 
 #include "SceneText.h"
 #include "Assignment.h"
+#include "Assignment01.h"
 
 GLFWwindow* m_window;
 const unsigned char FPS = 60; // FPS of this game
@@ -111,7 +112,7 @@ void Application::Init()
 
 void Application::Run()
 {
-	SceneManager::GetInstance()->SetActiveScene("Assignment");
+	SceneManager::GetInstance()->SetActiveScene("Assignment01");
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
 	while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE))
 	{
