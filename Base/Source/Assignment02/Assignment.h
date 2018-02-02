@@ -1,26 +1,27 @@
-#ifndef Assignment01_01_H
-#define Assignment01_01_H
+#ifndef Assignment_H
+#define Assignment_H
 
 #include "Scene.h"
 #include "Mtx44.h"
-#include "PlayerInfo/PlayerInfo.h"
-#include "GroundEntity.h"
-#include "FPSCamera.h"
+#include "../PlayerInfo/PlayerInfo.h"
+#include "../GroundEntity.h"
+#include "../FPSCamera.h"
 #include "Mesh.h"
 #include "MatrixStack.h"
-#include "GenericEntity.h"
-#include "SceneGraph/UpdateTransformation.h"
-#include "Enemy\AndroidRobots.h"
+#include "../GenericEntity.h"
+#include "../SceneGraph/UpdateTransformation.h"
+#include "../Enemy\AndroidRobots.h"
 
 class ShaderProgram;
 class SceneManager;
 class TextEntity;
 class Light;
-class Assignment01 : public Scene
+
+class Assignment : public Scene
 {	
 public:
-	Assignment01();
-	~Assignment01();
+	Assignment();
+	~Assignment();
 
 	virtual void Init();
 	virtual void Update(double dt);
@@ -28,7 +29,7 @@ public:
 	virtual void Exit();
 
 private:
-	Assignment01(SceneManager* _sceneMgr); // This is used to register to SceneManager
+	Assignment(SceneManager* _sceneMgr); // This is used to register to SceneManager
 
 	ShaderProgram* currProg;
 	CPlayerInfo* playerInfo;
@@ -40,7 +41,7 @@ private:
 	GenericEntity* theCube;
 	CAndroidRobot* theRobot;
 
-	static Assignment01* sInstance; // The pointer to the object that gets registered
+	static Assignment* sInstance; // The pointer to the object that gets registered
 };
 
 #endif

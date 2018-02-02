@@ -37,6 +37,9 @@
     <Filter Include="Enemy">
       <UniqueIdentifier>{f64e4c98-fd4d-4adf-ae23-64038e978c29}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assignment02">
+      <UniqueIdentifier>{15f9144e-4bef-43fe-8dff-07786a1a9090}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -120,14 +123,11 @@
     <ClCompile Include="Source\LevelOfDetails\LevelOfDetails.cpp">
       <Filter>LevelOfDetails</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Assignment.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Enemy\AndroidRobots.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Assignment01.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\Assignment02\Assignment.cpp">
+      <Filter>Assignment02</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -209,14 +209,11 @@
     <ClInclude Include="Source\LevelOfDetails\LevelOfDetails.h">
       <Filter>LevelOfDetails</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Assignment.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Enemy\AndroidRobots.h">
       <Filter>Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Assignment01.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Source\Assignment02\Assignment.h">
+      <Filter>Assignment02</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
