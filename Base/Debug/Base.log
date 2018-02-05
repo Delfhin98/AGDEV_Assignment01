@@ -1,1 +1,49 @@
-﻿
+﻿Build started 5/2/2018 11:48:36 AM.
+     1>Project "D:\School\AGDEV_Assignment01\Base\Base.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ID:\School\AGDEV_Assignment01\/Common/Source /ID:\School\AGDEV_Assignment01\/glfw/include /ID:\School\AGDEV_Assignment01\/glew/include /ID:\School\AGDEV_Assignment01\/Base/Source/Lua /ZI /nologo /W3 /WX- /Od /Oy- /D _VARIADIC_MAX=10 /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Source\Application.cpp Source\Assignment02\Assignment.cpp
+         Application.cpp
+     1>d:\school\agdev_assignment01\base\source\application.cpp(70): warning C4305: 'argument': truncation from 'double' to 'const float'
+         Generating Code...
+         Compiling...
+         Assignment.cpp
+         Generating Code...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\School\AGDEV_Assignment01\Debug\Base.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:D:\School\AGDEV_Assignment01\Debug /LIBPATH:"D:\School\AGDEV_Assignment01\/glfw/lib-msvc100" /LIBPATH:D:\School\AGDEV_Assignment01\/glew/lib /LIBPATH:D:\School\AGDEV_Assignment01\/Lua Common.lib legacy_stdio_definitions.lib winmm.lib opengl32.lib glu32.lib glew32.lib glfw3.lib lua5.1.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\School\AGDEV_Assignment01\Debug\Base.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\School\AGDEV_Assignment01\Debug\Base.lib" /MACHINE:X86 Debug\Application.obj
+         Debug\Assignment.obj
+         Debug\AndroidRobots.obj
+         Debug\EntityManager.obj
+         Debug\FPSCamera.obj
+         Debug\GenericEntity.obj
+         Debug\GroundEntity.obj
+         Debug\LevelOfDetails.obj
+         Debug\Light.obj
+         Debug\LuaInterface.obj
+         Debug\main.obj
+         Debug\OBJMesh.obj
+         Debug\PlayerInfo.obj
+         Debug\Grenade.obj
+         Debug\Laser.obj
+         Debug\Projectile.obj
+         Debug\SceneGraph.obj
+         Debug\SceneNode.obj
+         Debug\Transform.obj
+         Debug\UpdateTransformation.obj
+         Debug\SceneText.obj
+         Debug\SkyBoxEntity.obj
+         Debug\Grid.obj
+         Debug\SpatialPartition.obj
+         Debug\SpriteEntity.obj
+         Debug\TextEntity.obj
+         Debug\GrenadeThrow.obj
+         Debug\LaserBlaster.obj
+         Debug\Pistol.obj
+         Debug\WeaponInfo.obj
+     1>Application.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
+     1>LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+         Base.vcxproj -> D:\School\AGDEV_Assignment01\Debug\Base.exe
+     1>Done Building Project "D:\School\AGDEV_Assignment01\Base\Base.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:04.61

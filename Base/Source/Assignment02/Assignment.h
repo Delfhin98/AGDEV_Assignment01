@@ -12,6 +12,8 @@
 #include "../SceneGraph/UpdateTransformation.h"
 #include "../Enemy\AndroidRobots.h"
 
+#include "../Lua/LuaInterface.h"
+
 class ShaderProgram;
 class SceneManager;
 class TextEntity;
