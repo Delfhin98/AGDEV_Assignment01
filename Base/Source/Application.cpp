@@ -3,6 +3,7 @@
 #include "KeyboardController.h"
 #include "SceneManager.h"
 #include "GraphicsManager.h"
+#include "ShaderProgram.h"
 
 //Include GLEW
 #include <GL/glew.h>
@@ -14,8 +15,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "SceneText.h"
-#include "Assignment02\Assignment.h"
 #include "../Source/Lua/LuaInterface.h"
 
 GLFWwindow* m_window;
@@ -44,6 +43,54 @@ void resize_callback(GLFWwindow* window, int w, int h)
 bool Application::IsKeyPressed(unsigned short key)
 {
     return ((GetAsyncKeyState(key) & 0x8001) != 0);
+}
+
+void Application::InitDisplay(void)
+{
+	currProg = GraphicsManager::GetInstance()->LoadShader("default", "Shader//Texture.vertexshader", "Shader//Texture.fragmentshader");
+
+	// Tell the shader program to store these uniform locations
+	currProg->AddUniform("MVP");
+	currProg->AddUniform("MV");
+	currProg->AddUniform("MV_inverse_transpose");
+	currProg->AddUniform("material.kAmbient");
+	currProg->AddUniform("material.kDiffuse");
+	currProg->AddUniform("material.kSpecular");
+	currProg->AddUniform("material.kShininess");
+	currProg->AddUniform("lightEnabled");
+	currProg->AddUniform("numLights");
+	currProg->AddUniform("lights[0].type");
+	currProg->AddUniform("lights[0].position_cameraspace");
+	currProg->AddUniform("lights[0].color");
+	currProg->AddUniform("lights[0].power");
+	currProg->AddUniform("lights[0].kC");
+	currProg->AddUniform("lights[0].kL");
+	currProg->AddUniform("lights[0].kQ");
+	currProg->AddUniform("lights[0].spotDirection");
+	currProg->AddUniform("lights[0].cosCutoff");
+	currProg->AddUniform("lights[0].cosInner");
+	currProg->AddUniform("lights[0].exponent");
+	currProg->AddUniform("lights[1].type");
+	currProg->AddUniform("lights[1].position_cameraspace");
+	currProg->AddUniform("lights[1].color");
+	currProg->AddUniform("lights[1].power");
+	currProg->AddUniform("lights[1].kC");
+	currProg->AddUniform("lights[1].kL");
+	currProg->AddUniform("lights[1].kQ");
+	currProg->AddUniform("lights[1].spotDirection");
+	currProg->AddUniform("lights[1].cosCutoff");
+	currProg->AddUniform("lights[1].cosInner");
+	currProg->AddUniform("lights[1].exponent");
+	currProg->AddUniform("colorTextureEnabled");
+	currProg->AddUniform("colorTexture");
+	currProg->AddUniform("textEnabled");
+	currProg->AddUniform("textColor");
+
+	// Tell the graphics manager to use the shader we just loaded
+	GraphicsManager::GetInstance()->SetActiveShader("default");
+
+	currProg->UpdateInt("numLights", 1);
+	currProg->UpdateInt("textEnabled", 0);
 }
 
 Application::Application() :
@@ -122,11 +169,20 @@ void Application::Init()
 
 	// Init systems
 	GraphicsManager::GetInstance()->Init();
+
+	//Create the Game States
+	SceneManager::GetInstance()->AddScene("IntroState", new CIntroState());
+	SceneManager::GetInstance()->AddScene("MenuState", new CMenuState());
+	SceneManager::GetInstance()->AddScene("GameState", new Assignment());
+
+	//Set the active scene
+	SceneManager::GetInstance()->SetActiveScene("IntroState");
 }
 
 void Application::Run()
 {
-	SceneManager::GetInstance()->SetActiveScene("Assignment");
+	InitDisplay();
+	//SceneManager::GetInstance()->SetActiveScene("Assignment");
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
 	while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE))
 	{

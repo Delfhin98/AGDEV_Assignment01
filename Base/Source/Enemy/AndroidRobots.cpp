@@ -2,6 +2,7 @@
 #include "../EntityManager.h"
 #include "GraphicsManager.h"
 #include "RenderHelper.h"
+#include "../Waypoint//WaypointManager.h"
 
 CAndroidRobot::CAndroidRobot(void)
 	: GenericEntity(NULL)
@@ -13,7 +14,9 @@ CAndroidRobot::CAndroidRobot(void)
 	, maxBoundary(Vector3(0.0f, 0.0f, 0.0f))
 	, minBoundary(Vector3(0.0f, 0.0f, 0.0f))
 	, m_pTerrain(NULL)
+	,m_iWayPointIndex(-1)
 {
+	listOfWaypoints.clear();
 }
 
 CAndroidRobot::~CAndroidRobot()
@@ -27,11 +30,23 @@ void CAndroidRobot::Init(void)
 	defaultTarget.Set(-10.0f, -10, 0);
 	defaultUp.Set(0, 1, 0);
 
+	//Set up the waypoints
+	listOfWaypoints.push_back(0);
+	listOfWaypoints.push_back(1);
+	listOfWaypoints.push_back(2);
+
 	// Set the current values
 	position.Set(-10.0f, -10.0f, -80.0f);
 	target.Set(-10.0f, -10, 450);
 	scale.Set(20.f, 10.f, 20.f);
 	up.Set(0.0f, 1.0f, 0.0f);
+
+	CWaypoint* nextWaypoint = GetNextWaypoint();
+	if (nextWaypoint)
+		target = nextWaypoint->GetPosition();
+	else
+		target = Vector3(0, 0, 0);
+	cout << "Next target: " << target << endl;
 
 	// Set Boundary
 	maxBoundary.Set(1, 1, 1);
@@ -112,6 +127,19 @@ GroundEntity * CAndroidRobot::GetTerrain(void)
 	return m_pTerrain;
 }
 
+CWaypoint* CAndroidRobot::GetNextWaypoint(void)
+{
+	if ((int)listOfWaypoints.size() > 0)
+	{
+		m_iWayPointIndex++;
+		if (m_iWayPointIndex >= (int)listOfWaypoints.size())
+			m_iWayPointIndex = 0;
+		return CWaypointManager::GetInstance()->GetWaypoint(listOfWaypoints[m_iWayPointIndex]);
+	}
+	else
+		return NULL;
+}
+
 void CAndroidRobot::Update(double dt)
 {
 	Vector3 viewVector = (target - position).Normalized();
@@ -120,7 +148,7 @@ void CAndroidRobot::Update(double dt)
 	Constrain();
 	
 	// Update the target
-	if (position.z > 100.0f)
+	/*if (position.z > 100.0f)
 	{
 		target.z = position.z * -1;
 		target.x = defaultTarget.x;
@@ -129,6 +157,16 @@ void CAndroidRobot::Update(double dt)
 	{
 		target.z = position.z * -1;
 		target.x = defaultTarget.x;
+	}*/
+
+	if ((target - position).LengthSquared() < 25.0f)
+	{
+		CWaypoint* nextWayPoint = GetNextWaypoint();
+		if (nextWayPoint)
+			target = nextWayPoint->GetPosition();
+		else
+			target = Vector3(0, 0, 0);
+		cout << "Next target: " << target << endl;
 	}
 }
 

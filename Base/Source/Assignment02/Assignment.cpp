@@ -21,21 +21,20 @@
 #include "../Light.h"
 #include "../SkyBox/SkyBoxEntity.h"
 #include "../SceneGraph\SceneGraph.h"
-#include "../SpatialPartition\SpatialPartition.h"
 
 #include <iostream>
 using namespace std;
 
-Assignment* Assignment::sInstance = new Assignment(SceneManager::GetInstance());
+//Assignment* Assignment::sInstance = new Assignment(SceneManager::GetInstance());
 
 Assignment::Assignment()
 {
 }
 
-Assignment::Assignment(SceneManager* _sceneMgr)
-{
-	_sceneMgr->AddScene("Assignment", this);
-}
+//Assignment::Assignment(SceneManager* _sceneMgr)
+//{
+//	_sceneMgr->AddScene("Assignment", this);
+//}
 
 Assignment::~Assignment()
 {
@@ -45,6 +44,7 @@ Assignment::~Assignment()
 
 void Assignment::Init()
 {
+	/*
 	currProg = GraphicsManager::GetInstance()->LoadShader("default", "Shader//Texture.vertexshader", "Shader//Texture.fragmentshader");
 	
 	// Tell the shader program to store these uniform locations
@@ -87,6 +87,9 @@ void Assignment::Init()
 	// Tell the graphics manager to use the shader we just loaded
 	GraphicsManager::GetInstance()->SetActiveShader("default");
 
+	currProg->UpdateInt("numLights", 1);
+	currProg->UpdateInt("textEnabled", 0);
+	*/
 	lights[0] = new Light();
 	GraphicsManager::GetInstance()->AddLight("lights[0]", lights[0]);
 	lights[0]->type = Light::LIGHT_DIRECTIONAL;
@@ -109,9 +112,6 @@ void Assignment::Init()
 	lights[1]->color.Set(1, 1, 0.5f);
 	lights[1]->power = 0.4f;
 	lights[1]->name = "lights[1]";
-
-	currProg->UpdateInt("numLights", 1);
-	currProg->UpdateInt("textEnabled", 0);
 	
 	// Create the playerinfo instance, which manages all information about the player
 	playerInfo = CPlayerInfo::GetInstance();
@@ -170,6 +170,23 @@ void Assignment::Init()
 	// Create entities into the scene
 	Create::Entity("reference", Vector3(0.0f, 0.0f, 0.0f), 99); // Reference
 	Create::Entity("lightball", Vector3(lights[0]->position.x, lights[0]->position.y, lights[0]->position.z), 99); // Lightball
+	
+	//Create a Waypoint inside WaypointManager
+	lua_getglobal(CLuaInterface::GetInstance()->theLuaState, "Waypoint_A_1");
+	int aWayPoint = CWaypointManager::GetInstance()->AddWaypoint(Vector3(	CLuaInterface::GetInstance()->GetField("x"),
+																			CLuaInterface::GetInstance()->GetField("y"),
+																			CLuaInterface::GetInstance()->GetField("z")));
+	lua_getglobal(CLuaInterface::GetInstance()->theLuaState, "Waypoint_A_2");
+	int anotherWaypoint = CWaypointManager::GetInstance()->AddWaypoint(aWayPoint, Vector3(	CLuaInterface::GetInstance()->GetField("x"),
+																							CLuaInterface::GetInstance()->GetField("y"),
+																							CLuaInterface::GetInstance()->GetField("z")));
+	lua_getglobal(CLuaInterface::GetInstance()->theLuaState, "Waypoint_A_3");
+	CWaypointManager::GetInstance()->AddWaypoint(anotherWaypoint, Vector3(	CLuaInterface::GetInstance()->GetField("x"),
+																			CLuaInterface::GetInstance()->GetField("y"),
+																			CLuaInterface::GetInstance()->GetField("z")));
+	CWaypointManager::GetInstance()->PrintSelf();
+
+	//still need to create an enemy to test waypoint
 
 	groundEntity = Create::Ground("GEO_WOOD_TEXTURE", "GEO_WOOD_TEXTURE");
 	//Create::Text3DObject("text", Vector3(0.0f, 0.0f, 0.0f), "DM2210", Vector3(10.0f, 10.0f, 10.0f), Color(0, 1, 1));

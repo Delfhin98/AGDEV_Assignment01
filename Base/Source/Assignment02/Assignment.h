@@ -11,7 +11,8 @@
 #include "../GenericEntity.h"
 #include "../SceneGraph/UpdateTransformation.h"
 #include "../Enemy\AndroidRobots.h"
-
+#include "../SpatialPartition\SpatialPartition.h"
+#include "../Waypoint/WaypointManager.h"
 #include "../Lua/LuaInterface.h"
 
 class ShaderProgram;
@@ -31,7 +32,7 @@ public:
 	virtual void Exit();
 
 private:
-	Assignment(SceneManager* _sceneMgr); // This is used to register to SceneManager
+	//Assignment(SceneManager* _sceneMgr); // This is used to register to SceneManager
 
 	ShaderProgram* currProg;
 	CPlayerInfo* playerInfo;
@@ -43,7 +44,7 @@ private:
 	GenericEntity* theCube;
 	CAndroidRobot* theRobot;
 
-	static Assignment* sInstance; // The pointer to the object that gets registered
+	//static Assignment* sInstance; // The pointer to the object that gets registered
 };
 
 #endif
