@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Assignment02\Assignment.cpp" />
+    <ClCompile Include="Source\Assignment02\Enemy.cpp" />
     <ClCompile Include="Source\Enemy\AndroidRobots.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\FPSCamera.cpp" />
@@ -49,6 +50,7 @@
   <ItemGroup>
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\Assignment02\Assignment.h" />
+    <ClInclude Include="Source\Assignment02\Enemy.h" />
     <ClInclude Include="Source\Enemy\AndroidRobots.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\FPSCamera.h" />

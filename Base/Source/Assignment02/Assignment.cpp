@@ -90,6 +90,7 @@ void Assignment::Init()
 	currProg->UpdateInt("numLights", 1);
 	currProg->UpdateInt("textEnabled", 0);
 	*/
+
 	lights[0] = new Light();
 	GraphicsManager::GetInstance()->AddLight("lights[0]", lights[0]);
 	lights[0]->type = Light::LIGHT_DIRECTIONAL;
@@ -166,7 +167,6 @@ void Assignment::Init()
 	CSpatialPartition::GetInstance()->SetLevelOfDetails(10000.0f, 20000.0f);
 	EntityManager::GetInstance()->SetSpatialPartition(CSpatialPartition::GetInstance());
 
-
 	// Create entities into the scene
 	Create::Entity("reference", Vector3(0.0f, 0.0f, 0.0f), 99); // Reference
 	Create::Entity("lightball", Vector3(lights[0]->position.x, lights[0]->position.y, lights[0]->position.z), 99); // Lightball
@@ -186,7 +186,9 @@ void Assignment::Init()
 																			CLuaInterface::GetInstance()->GetField("z")));
 	CWaypointManager::GetInstance()->PrintSelf();
 
-	//still need to create an enemy to test waypoint
+	// Create a CEnemy Instance
+	theEnemy = new CEnemy();
+	theEnemy->Init();
 
 	groundEntity = Create::Ground("GEO_WOOD_TEXTURE", "GEO_WOOD_TEXTURE");
 	//Create::Text3DObject("text", Vector3(0.0f, 0.0f, 0.0f), "DM2210", Vector3(10.0f, 10.0f, 10.0f), Color(0, 1, 1));
@@ -201,6 +203,7 @@ void Assignment::Init()
 	groundEntity->SetScale(Vector3(100.0f, 100.0f, 100.0f));
 	groundEntity->SetGrids(Vector3(10.0f, 1.0f, 10.0f));
 	playerInfo->SetTerrain(groundEntity);
+	theEnemy->SetTerrain(groundEntity);
 
 	// Setup the 2D entities
 	float halfWindowWidth = Application::GetInstance().GetWindowWidth() / 2.0f;

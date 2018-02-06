@@ -14,6 +14,7 @@
 #include "../SpatialPartition\SpatialPartition.h"
 #include "../Waypoint/WaypointManager.h"
 #include "../Lua/LuaInterface.h"
+#include "../Assignment02/Enemy.h"
 
 class ShaderProgram;
 class SceneManager;
@@ -43,6 +44,7 @@ private:
 
 	GenericEntity* theCube;
 	CAndroidRobot* theRobot;
+	CEnemy* theEnemy;
 
 	//static Assignment* sInstance; // The pointer to the object that gets registered
 };

@@ -153,6 +153,9 @@
     <ClCompile Include="Source\GameStateManagement\MenuState.cpp">
       <Filter>GameStateManagement</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Assignment02\Enemy.cpp">
+      <Filter>Assignment02</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -268,6 +271,9 @@
     </ClInclude>
     <ClInclude Include="Source\GameStateManagement\MenuState.h">
       <Filter>GameStateManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Assignment02\Enemy.h">
+      <Filter>Assignment02</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
