@@ -16,6 +16,7 @@ CEnemy::CEnemy()
 	, minBoundary(Vector3(0.0f, 0.0f, 0.0f))
 	, m_pTerrain(NULL)
 	, m_iWayPointIndex(-1)
+	, _CurrState(IDLE)
 {
 	listOfWaypoints.clear();
 }
@@ -28,7 +29,7 @@ CEnemy::~CEnemy()
 void CEnemy::Init(void)
 {
 	// Set the default values
-	defaultPosition.Set(0, 0, 10);
+	defaultPosition.Set(0, 0, 0);
 	defaultTarget.Set(0, 0, 0);
 	defaultUp.Set(0, 1, 0);
 
@@ -40,15 +41,17 @@ void CEnemy::Init(void)
 	m_iWayPointIndex = 0;
 
 	// Set the current values
-	position.Set(10.0f, 0.0f, 0.0f);
-	//target.Set(10.0f, 0.0f, 450.0f);
-	CWaypoint* nextWaypoint = GetNextWaypoint();
-	if (nextWaypoint)
-		target = nextWaypoint->GetPosition();
-	else
-		target = Vector3(0, 0, 0);
-	cout << "Next target: " << target << endl;
+	position.Set(0.0f, 0.0f, 0.0f);
+	target.Set(0.0f, 0.0f, 0.0f);
 	up.Set(0.0f, 1.0f, 0.0f);
+
+	//CWaypoint* nextWaypoint = GetNextWaypoint();
+	//if (nextWaypoint)
+	//	target = nextWaypoint->GetPosition();
+	//else
+	//	target = Vector3(0, 0, 0);
+
+	//cout << "Next target: " << target << endl;
 
 	// Set Boundary
 	maxBoundary.Set(1, 1, 1);
@@ -56,6 +59,9 @@ void CEnemy::Init(void)
 
 	// Set speed
 	m_dSpeed = 10.0;
+
+	// Set State
+	_CurrState = IDLE;
 
 	// Initialise the LOD meshes
 	InitLOD("cube", "cube", "cube");
@@ -150,30 +156,56 @@ CWaypoint* CEnemy::GetNextWaypoint(void)
 // Update
 void CEnemy::Update(double dt)
 {
-	Vector3 viewVector = (target - position).Normalized();
-	position += viewVector * (float)m_dSpeed * (float)dt;
-	//cout << position << "..." << viewVector << endl;
+	//Vector3 viewVector = (target - position).Normalized();
+	//position += viewVector * (float)m_dSpeed * (float)dt;
 
 	// Constrain the position
 	Constrain();
 
-	// Update the target
-	/*
-	if (position.z > 400.0f)
-	target.z = position.z * -1;
-	else if (position.z < -400.0f)
-	target.z = position.z * -1;
-	*/
+	// Timer to be used to change state.
+	float _Timer = 0.0f;
+	_Timer += (float)m_dSpeed * (float)dt;
 
-	if ((target - position).LengthSquared() < 25.0f)
+	// Update on Enemy State(s)
+	switch (_CurrState)
 	{
-		CWaypoint* nextWaypoint = GetNextWaypoint();
-		if (nextWaypoint)
-			target = nextWaypoint->GetPosition();
-		else
-			target = Vector3(0, 0, 0);
-		cout << "Next target: " << target << endl;
+	case IDLE:
+	{
+		// 1. Enemy will not move.
+		// 2. Enemy will stay at Original Position or at a Waypoint.
+		// 3. Enemy State will change to PATROL based on a timer.
+		cout << "In IDLE STATE" << endl;
+		if (_Timer > 0.4f)
+		{
+			_CurrState = PATROL;
+		}
+		break;
 	}
+	case PATROL:
+	{
+		cout << "In PATROL STATE" << endl;
+
+		if (_Timer > 0.8f)
+		{
+			_Timer = 0.0f;
+			_CurrState = IDLE;
+		}
+		break;
+	}
+	default:
+		cout << "Error! Invalid State." << endl;
+	}
+
+
+	//if ((target - position).LengthSquared() < 25.0f)
+	//{
+	//	CWaypoint* nextWaypoint = GetNextWaypoint();
+	//	if (nextWaypoint)
+	//		target = nextWaypoint->GetPosition();
+	//	else
+	//		target = Vector3(0, 0, 0);
+	//	cout << "Next target: " << target << endl;
+	//}
 }
 
 // Constrain the position within the borders

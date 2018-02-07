@@ -9,9 +9,16 @@ using namespace std;
 
 class Mesh;
 
-class CEnemy :
-	public GenericEntity
+class CEnemy : public GenericEntity
 {
+	// Enemy State
+	enum ENEMY_STATE
+	{
+		NONE = 0,
+		IDLE,
+		PATROL
+	};
+
 protected:
 	Vector3 defaultPosition, defaultTarget, defaultUp;
 	Vector3 target, up;
@@ -55,6 +62,9 @@ public:
 	GroundEntity* GetTerrain(void);
 	// Get next Waypoint for this CEnemy
 	CWaypoint* GetNextWaypoint(void);
+
+	// Initial Enemy State
+	ENEMY_STATE _CurrState;
 
 	// Update
 	void Update(double dt = 0.0333f);
