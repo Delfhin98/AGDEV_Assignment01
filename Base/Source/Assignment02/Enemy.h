@@ -33,6 +33,8 @@ protected:
 	double m_dSpeed;
 	double m_dAcceleration;
 
+	float _Timer;
+
 public:
 	CEnemy(void);
 	virtual ~CEnemy();
