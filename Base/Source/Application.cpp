@@ -175,6 +175,11 @@ void Application::Init()
 	SceneManager::GetInstance()->AddScene("MenuState", new CMenuState());
 	SceneManager::GetInstance()->AddScene("GameState", new Assignment());
 
+	//SceneManager::GetInstance()->AddScene("OptionsState", new COptionsState());
+	//SceneManager::GetInstance()->AddScene("ControlsState", new CControlsState());
+	SceneManager::GetInstance()->AddScene("HelpState", new CHelpState());
+	//SceneManager::GetInstance()->AddScene("PauseState", new CPauseState());
+
 	//Set the active scene
 	SceneManager::GetInstance()->SetActiveScene("IntroState");
 }

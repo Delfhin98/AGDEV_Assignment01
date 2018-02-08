@@ -23,5 +23,7 @@ public:
 private:
 	FPSCamera camera;
 	SpriteEntity* IntroStateBackground;
+
+	float timer;
 	//	TextEntity* textObj[3];
 };

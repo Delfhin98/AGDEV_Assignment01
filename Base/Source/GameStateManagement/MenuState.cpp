@@ -45,8 +45,26 @@ void CMenuState::Update(double dt)
 {
 	if (KeyboardController::GetInstance()->IsKeyReleased(VK_SPACE))
 	{
-		cout << "Loading CMenuState" << endl;
+		cout << "Loading CGameState" << endl;
 		SceneManager::GetInstance()->SetActiveScene("GameState");
+	}
+
+	//else if (KeyboardController::GetInstance()->IsKeyReleased('z'))
+	//{
+	//	cout << "Loading CMenuState" << endl;
+	//	SceneManager::GetInstance()->SetActiveScene("OptionsState");
+	//}
+
+	//else if (KeyboardController::GetInstance()->IsKeyReleased('x'))
+	//{
+	//	cout << "Loading CControlState" << endl;
+	//	SceneManager::GetInstance()->SetActiveScene("ControlsState");
+	//}
+
+	else if (KeyboardController::GetInstance()->IsKeyReleased(0x48))
+	{
+		cout << "Loading CHelpState" << endl;
+		SceneManager::GetInstance()->SetActiveScene("HelpState");
 	}
 }
 void CMenuState::Render()
