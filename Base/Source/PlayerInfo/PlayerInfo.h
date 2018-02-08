@@ -97,6 +97,9 @@ public:
 	// Constrain the position within the borders
 	void Constrain(void);
 
+	void addHP(int add);
+	int getHP(void);
+
 	// Handling Camera
 	void AttachCamera(FPSCamera* _cameraPtr);
 	void DetachCamera(void);
@@ -125,6 +128,8 @@ private:
 
 	CWeaponInfo* primaryWeapon;
 	CWeaponInfo* secondaryWeapon;
+
+	int health;
 
 	//Keys to move the player
 	char keyMoveForward;

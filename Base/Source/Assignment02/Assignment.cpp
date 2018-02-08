@@ -205,6 +205,9 @@ void Assignment::Init()
 	playerInfo->SetTerrain(groundEntity);
 	theEnemy->SetTerrain(groundEntity);
 
+	//Set enemy's attack timer
+	attackTimer = 0.5f;
+
 	// Setup the 2D entities
 	float halfWindowWidth = Application::GetInstance().GetWindowWidth() / 2.0f;
 	float halfWindowHeight = Application::GetInstance().GetWindowHeight() / 2.0f;
@@ -223,39 +226,39 @@ void Assignment::Update(double dt)
 	EntityManager::GetInstance()->Update(dt);
 
 	// THIS WHOLE CHUNK TILL <THERE> CAN REMOVE INTO ENTITIES LOGIC! Or maybe into a scene function to keep the update clean
-	if(KeyboardController::GetInstance()->IsKeyDown('1'))
+	if (KeyboardController::GetInstance()->IsKeyDown('1'))
 		glEnable(GL_CULL_FACE);
-	if(KeyboardController::GetInstance()->IsKeyDown('2'))
+	if (KeyboardController::GetInstance()->IsKeyDown('2'))
 		glDisable(GL_CULL_FACE);
-	if(KeyboardController::GetInstance()->IsKeyDown('3'))
+	if (KeyboardController::GetInstance()->IsKeyDown('3'))
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	if(KeyboardController::GetInstance()->IsKeyDown('4'))
+	if (KeyboardController::GetInstance()->IsKeyDown('4'))
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	
-	if(KeyboardController::GetInstance()->IsKeyDown('5'))
+
+	if (KeyboardController::GetInstance()->IsKeyDown('5'))
 	{
 		lights[0]->type = Light::LIGHT_POINT;
 	}
-	else if(KeyboardController::GetInstance()->IsKeyDown('6'))
+	else if (KeyboardController::GetInstance()->IsKeyDown('6'))
 	{
 		lights[0]->type = Light::LIGHT_DIRECTIONAL;
 	}
-	else if(KeyboardController::GetInstance()->IsKeyDown('7'))
+	else if (KeyboardController::GetInstance()->IsKeyDown('7'))
 	{
 		lights[0]->type = Light::LIGHT_SPOT;
 	}
 
-	if(KeyboardController::GetInstance()->IsKeyDown('I'))
+	if (KeyboardController::GetInstance()->IsKeyDown('I'))
 		lights[0]->position.z -= (float)(10.f * dt);
-	if(KeyboardController::GetInstance()->IsKeyDown('K'))
+	if (KeyboardController::GetInstance()->IsKeyDown('K'))
 		lights[0]->position.z += (float)(10.f * dt);
-	if(KeyboardController::GetInstance()->IsKeyDown('J'))
+	if (KeyboardController::GetInstance()->IsKeyDown('J'))
 		lights[0]->position.x -= (float)(10.f * dt);
-	if(KeyboardController::GetInstance()->IsKeyDown('L'))
+	if (KeyboardController::GetInstance()->IsKeyDown('L'))
 		lights[0]->position.x += (float)(10.f * dt);
-	if(KeyboardController::GetInstance()->IsKeyDown('O'))
+	if (KeyboardController::GetInstance()->IsKeyDown('O'))
 		lights[0]->position.y -= (float)(10.f * dt);
-	if(KeyboardController::GetInstance()->IsKeyDown('P'))
+	if (KeyboardController::GetInstance()->IsKeyDown('P'))
 		lights[0]->position.y += (float)(10.f * dt);
 
 	if (KeyboardController::GetInstance()->IsKeyReleased('M'))
@@ -312,6 +315,33 @@ void Assignment::Update(double dt)
 	ss1.precision(4);
 	ss1 << "Player:" << playerInfo->GetPos();
 	textObj[2]->SetText(ss1.str());
+
+	attackTimer -= dt;
+
+	if (attackTimer < 0)
+	{
+		//if distance between enemy and player is short enough
+		if ((theEnemy->GetPosition() - CPlayerInfo::GetInstance()->GetPos()).Length() < 3.f)
+		{
+			//deal damage to player
+			CPlayerInfo::GetInstance()->addHP(-1);
+			//cout << "hit" << endl;
+		}
+		attackTimer = 0.5f;
+	}
+
+	//if enemy is dead
+	if (theEnemy->IsDone())
+	{
+		cout << "Loading WinState" << endl;
+		SceneManager::GetInstance()->SetActiveScene("WinState");
+	}
+	//if player is dead
+	else if (CPlayerInfo::GetInstance()->getHP() <= 0)
+	{
+		cout << "Loading LoseState" << endl;
+		SceneManager::GetInstance()->SetActiveScene("LoseState");
+	}
 
 	if (KeyboardController::GetInstance()->IsKeyReleased(0x50))
 	{

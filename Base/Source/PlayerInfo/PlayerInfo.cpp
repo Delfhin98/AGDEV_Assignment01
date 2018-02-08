@@ -29,6 +29,7 @@ CPlayerInfo::CPlayerInfo(void)
 	, m_pTerrain(NULL)
 	, primaryWeapon(NULL)
 	, secondaryWeapon(NULL)
+	, health(5)
 	, keyMoveForward('W')
 	, keyMoveBackward('S')
 	, keyMoveLeft('A')
@@ -76,6 +77,8 @@ void CPlayerInfo::Init(void)
 	//secondaryWeapon->Init();
 	secondaryWeapon = new CGrenadeThrow();
 	secondaryWeapon->Init();
+
+	health = 5;
 
 	keyMoveForward = CLuaInterface::GetInstance()->getCharValue("moveForward");
 	keyMoveBackward = CLuaInterface::GetInstance()->getCharValue("moveBackward");
@@ -600,6 +603,16 @@ void CPlayerInfo::Constrain(void)
 		if (position.y != m_pTerrain->GetTerrainHeight(position))
 			position.y = m_pTerrain->GetTerrainHeight(position);
 	}
+}
+
+void CPlayerInfo::addHP(int add)
+{
+	this->health += add;
+}
+
+int CPlayerInfo::getHP(void)
+{
+	return health;
 }
 
 void CPlayerInfo::AttachCamera(FPSCamera* _cameraPtr)

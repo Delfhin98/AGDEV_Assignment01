@@ -45,7 +45,8 @@ void CIntroState::Init()
 void CIntroState::Update(double dt)
 {
 	timer -= dt;
-
+	
+	//After 3 seconds, automatically change scene
 	if (timer < 0)
 	{
 		cout << "Loading MenuState" << endl;

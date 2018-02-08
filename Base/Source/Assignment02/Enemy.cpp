@@ -78,6 +78,7 @@ void CEnemy::Init(void)
 	// Add to EntityManager
 	EntityManager::GetInstance()->AddEntity(this, true);
 
+	SetHP(5);
 }
 
 // Reset this player instance to default

@@ -46,6 +46,8 @@ private:
 	CAndroidRobot* theRobot;
 	CEnemy* theEnemy;
 
+	float attackTimer;
+
 	//static Assignment* sInstance; // The pointer to the object that gets registered
 };
 

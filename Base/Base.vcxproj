@@ -19,8 +19,10 @@
     <ClCompile Include="Source\FPSCamera.cpp" />
     <ClCompile Include="Source\GameStateManagement\HelpState.cpp" />
     <ClCompile Include="Source\GameStateManagement\IntroState.cpp" />
+    <ClCompile Include="Source\GameStateManagement\LoseState.cpp" />
     <ClCompile Include="Source\GameStateManagement\MenuState.cpp" />
     <ClCompile Include="Source\GameStateManagement\PauseState.cpp" />
+    <ClCompile Include="Source\GameStateManagement\WinState.cpp" />
     <ClCompile Include="Source\GenericEntity.cpp" />
     <ClCompile Include="Source\GroundEntity.cpp" />
     <ClCompile Include="Source\LevelOfDetails\LevelOfDetails.cpp" />
@@ -58,8 +60,10 @@
     <ClInclude Include="Source\FPSCamera.h" />
     <ClInclude Include="Source\GameStateManagement\HelpState.h" />
     <ClInclude Include="Source\GameStateManagement\IntroState.h" />
+    <ClInclude Include="Source\GameStateManagement\LoseState.h" />
     <ClInclude Include="Source\GameStateManagement\MenuState.h" />
     <ClInclude Include="Source\GameStateManagement\PauseState.h" />
+    <ClInclude Include="Source\GameStateManagement\WinState.h" />
     <ClInclude Include="Source\GenericEntity.h" />
     <ClInclude Include="Source\GroundEntity.h" />
     <ClInclude Include="Source\LevelOfDetails\LevelOfDetails.h" />
