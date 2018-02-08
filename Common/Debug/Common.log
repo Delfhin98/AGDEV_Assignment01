@@ -1,32 +1,8 @@
-﻿Build started 8/2/2018 7:36:53 PM.
+﻿Build started 8/2/2018 8:26:52 PM.
      1>Project "D:\School\AGDEV_Assignment01\Common\Common.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ID:\School\AGDEV_Assignment01\/glew/include /ID:\School\AGDEV_Assignment01\/glfw/include /ZI /nologo /W3 /WX- /Od /Oy- /D _VARIADIC_MAX=10 /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\Common.pdb" /Gd /TP /analyze- /errorReport:prompt Source\CameraBase.cpp Source\Collider\Collider.cpp Source\EntityBase.cpp Source\GraphicsManager.cpp Source\KeyboardController.cpp Source\LightBase.cpp Source\LoadOBJ.cpp Source\LoadTGA.cpp Source\MathUtility.cpp Source\MatrixStack.cpp Source\Mesh.cpp Source\MeshBuilder.cpp Source\MouseController.cpp Source\Mtx44.cpp Source\RenderHelper.cpp Source\SceneManager.cpp Source\ShaderProgram.cpp Source\timer.cpp Source\Utility.cpp Source\Vector2.cpp Source\Vector3.cpp Source\Win32Input.cpp
-         Win32Input.cpp
-         Vector3.cpp
-         Vector2.cpp
-         Utility.cpp
-         timer.cpp
-         ShaderProgram.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ID:\School\AGDEV_Assignment01\/glew/include /ID:\School\AGDEV_Assignment01\/glfw/include /ZI /nologo /W3 /WX- /Od /Oy- /D _VARIADIC_MAX=10 /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\Common.pdb" /Gd /TP /analyze- /errorReport:prompt Source\SceneManager.cpp
          SceneManager.cpp
-         RenderHelper.cpp
-         Mtx44.cpp
-         MouseController.cpp
-         MeshBuilder.cpp
-         Mesh.cpp
-         MatrixStack.cpp
-         MathUtility.cpp
-         LoadTGA.cpp
-         LoadOBJ.cpp
-         LightBase.cpp
-         KeyboardController.cpp
-         GraphicsManager.cpp
-         EntityBase.cpp
-         Generating Code...
-         Compiling...
-         Collider.cpp
-         CameraBase.cpp
-         Generating Code...
        Lib:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\Lib.exe /OUT:"D:\School\AGDEV_Assignment01\Debug\Common.lib" /NOLOGO Debug\CameraBase.obj
          Debug\Collider.obj
@@ -55,4 +31,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:55.33
+Time Elapsed 00:00:00.96

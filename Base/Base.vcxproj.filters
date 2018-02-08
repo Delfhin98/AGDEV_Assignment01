@@ -159,6 +159,9 @@
     <ClCompile Include="Source\GameStateManagement\HelpState.cpp">
       <Filter>GameStateManagement</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GameStateManagement\PauseState.cpp">
+      <Filter>GameStateManagement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -279,6 +282,9 @@
       <Filter>Assignment02</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameStateManagement\HelpState.h">
+      <Filter>GameStateManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameStateManagement\PauseState.h">
       <Filter>GameStateManagement</Filter>
     </ClInclude>
   </ItemGroup>

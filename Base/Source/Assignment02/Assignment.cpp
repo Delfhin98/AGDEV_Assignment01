@@ -290,6 +290,7 @@ void Assignment::Update(double dt)
 	{
 		cout << "Mouse Wheel has offset in Y-axis of " << MouseController::GetInstance()->GetMouseScrollStatus(MouseController::SCROLL_TYPE_YOFFSET) << endl;
 	}
+
 	// <THERE>
 
 	// Update the player position and other details based on keyboard and mouse inputs
@@ -311,6 +312,12 @@ void Assignment::Update(double dt)
 	ss1.precision(4);
 	ss1 << "Player:" << playerInfo->GetPos();
 	textObj[2]->SetText(ss1.str());
+
+	if (KeyboardController::GetInstance()->IsKeyReleased(0x50))
+	{
+		cout << "Loading PauseState" << endl;
+		SceneManager::GetInstance()->SetActiveScene("PauseState");
+	}
 }
 
 void Assignment::Render()

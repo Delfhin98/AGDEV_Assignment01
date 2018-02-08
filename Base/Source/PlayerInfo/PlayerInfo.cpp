@@ -555,11 +555,11 @@ void CPlayerInfo::Update(double dt)
 			secondaryWeapon->Discharge(position, target, this);
 	}
 
-	// If the user presses R key, then reset the view to default values
-	if (KeyboardController::GetInstance()->IsKeyDown('P'))
-	{
-		Reset();
-	}
+	//// If the user presses R key, then reset the view to default values
+	//if (KeyboardController::GetInstance()->IsKeyDown('Q'))
+	//{
+	//	Reset();
+	//}
 	else
 	{
 		UpdateJumpUpwards(dt);

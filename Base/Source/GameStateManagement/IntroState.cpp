@@ -26,7 +26,7 @@ CIntroState::~CIntroState()
 
 void CIntroState::Init()
 {
-	timer = 2.f;
+	timer = 3.f;
 	// Create and attach the camera to the scene
 	camera.Init(Vector3(0, 0, 10), Vector3(0, 0, 0), Vector3(0, 1, 0));
 	GraphicsManager::GetInstance()->AttachCamera(&camera);

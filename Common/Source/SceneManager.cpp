@@ -3,6 +3,7 @@
 
 SceneManager::SceneManager() : activeScene(nullptr), nextScene(nullptr)
 {
+	gameInitialized = false;
 }
 
 SceneManager::~SceneManager()
@@ -17,11 +18,29 @@ void SceneManager::Update(double _dt)
 		if (activeScene)
 		{
 			// Scene is valid, need to call appropriate function to exit
-			activeScene->Exit();
+			if (activeScene != sceneMap["GameState"])
+				activeScene->Exit();
+			else if (activeScene == sceneMap["GameState"])
+			{
+				if (!gameInitialized)
+				{
+					activeScene->Exit();
+				}
+			}
 		}
 		
 		activeScene = nextScene;
-		activeScene->Init();
+
+		if (activeScene != sceneMap["GameState"])
+			activeScene->Init();
+		else if (activeScene == sceneMap["GameState"])
+		{
+			if (!gameInitialized)
+			{
+				activeScene->Init();
+				gameInitialized = true;
+			}
+		}
 	}
 
 	if (activeScene)

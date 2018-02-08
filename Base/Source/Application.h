@@ -7,6 +7,7 @@
 #include "GameStateManagement\IntroState.h"
 #include "GameStateManagement\MenuState.h"
 #include "GameStateManagement\HelpState.h"
+#include "GameStateManagement\PauseState.h"
 
 class ShaderProgram;
 struct GLFWwindow;

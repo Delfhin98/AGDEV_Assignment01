@@ -28,6 +28,8 @@ private:
 
 	std::map<std::string, Scene*> sceneMap;
 	Scene* activeScene, *nextScene;
+
+	bool gameInitialized;
 };
 
 #endif // SCENE_MANAGER_H
