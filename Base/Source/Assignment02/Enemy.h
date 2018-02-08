@@ -2,6 +2,7 @@
 #include "../GenericEntity.h"
 #include "../GroundEntity.h"
 #include "../Waypoint/Waypoint.h"
+#include "../PlayerInfo/PlayerInfo.h"
 
 #include <vector>
 #include <string>
@@ -16,7 +17,8 @@ class CEnemy : public GenericEntity
 	{
 		NONE = 0,
 		IDLE,
-		PATROL
+		PATROL,
+		CHASE
 	};
 
 protected:
@@ -34,6 +36,8 @@ protected:
 	double m_dAcceleration;
 
 	float _Timer;
+	// PlayerInfo
+	CPlayerInfo* _playerInfo;
 
 public:
 	CEnemy(void);

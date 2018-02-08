@@ -18,6 +18,7 @@ CEnemy::CEnemy()
 	, m_iWayPointIndex(-1)
 	, _CurrState(IDLE)
 	, _Timer(0.0f)
+	, _playerInfo(NULL)
 {
 	listOfWaypoints.clear();
 }
@@ -61,6 +62,10 @@ void CEnemy::Init(void)
 
 	// Set State
 	_CurrState = IDLE;
+
+	// Set PlayerInfo Pos and Target
+	_playerInfo = CPlayerInfo::GetInstance();
+	_playerInfo->Init();
 
 	// Initialise the LOD meshes
 	InitLOD("cube", "cube", "cube");
@@ -160,6 +165,7 @@ void CEnemy::Update(double dt)
 
 	// Timer to be used to change state.
 	_Timer += (float)m_dSpeed * (float)dt * 0.1f;
+	cout << _Timer << endl;
 
 	// Update on Enemy State(s)
 	switch (_CurrState)
@@ -202,11 +208,30 @@ void CEnemy::Update(double dt)
 				target = defaultTarget;
 		}
 
+		// 3. Enemy State will change to CHASE based on a timer. (For now)
+		if (_Timer > 50.f)
+		{
+			_CurrState = CHASE;
+			cout << "Changing to CHASE STATE" << endl;
+		}
+
+		break;
+	}
+	case CHASE:
+	{
+		// 1. Enemy can move.
+		m_dSpeed = 10.0f;
+		Vector3 viewVector = (target - position).Normalized();
+		position += viewVector * (float)m_dSpeed * (float)dt;
+
+		// 2. Enemy will chase the Player.
+		target = _playerInfo->GetPos() - Vector3(2.f,2.f,2.f);
+		
 		// 3. Enemy State will change to IDLE based on a timer. (For now)
 		if (_Timer > 80.f)
 		{
+			_Timer = 0.f;
 			_CurrState = IDLE;
-			_Timer = 0.0f;
 			cout << "Changing to IDLE STATE" << endl;
 		}
 
