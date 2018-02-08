@@ -38,6 +38,9 @@ protected:
 	float _Timer;
 	// PlayerInfo
 	CPlayerInfo* _playerInfo;
+	// Initial Enemy State
+	ENEMY_STATE _CurrState;
+	ENEMY_STATE _PrevState;
 
 public:
 	CEnemy(void);
@@ -68,9 +71,6 @@ public:
 	GroundEntity* GetTerrain(void);
 	// Get next Waypoint for this CEnemy
 	CWaypoint* GetNextWaypoint(void);
-
-	// Initial Enemy State
-	ENEMY_STATE _CurrState;
 
 	// Update
 	void Update(double dt = 0.0333f);

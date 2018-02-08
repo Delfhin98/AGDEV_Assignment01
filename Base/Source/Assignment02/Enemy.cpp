@@ -62,6 +62,7 @@ void CEnemy::Init(void)
 
 	// Set State
 	_CurrState = IDLE;
+	_PrevState = IDLE;
 
 	// Set PlayerInfo Pos and Target
 	_playerInfo = CPlayerInfo::GetInstance();
@@ -173,7 +174,7 @@ void CEnemy::Update(double dt)
 	{
 		// 1. Enemy will not move.
 		// 2. Enemy will move to Original Position or to a Waypoint.
-		if (position != defaultPosition)
+		if (position != defaultPosition && _PrevState != CHASE)
 		{
 			Vector3 viewVector = (target - position).Normalized();
 			position += viewVector * (float)m_dSpeed * (float)dt;
@@ -181,17 +182,30 @@ void CEnemy::Update(double dt)
 			target = defaultTarget;
 		}
 
+		if (_PrevState == CHASE)
+		{
+			Vector3 viewVector = (target - position).Normalized();
+			position += viewVector * (float)m_dSpeed * (float)dt;
+
+			CWaypointManager* _nearestWaypoint;
+			CWaypoint* _waypoint = _nearestWaypoint->GetInstance()->GetNearestWaypoint(position);
+
+			target = _waypoint->GetPosition();
+		}
+
 		// 3. Enemy State will change to CHASE when Player is within its range.
 		float _dist = (_playerInfo->GetPos() - position).Length();
 
 		if (_dist < 20.0f)
 		{
+			_PrevState = IDLE; 
 			_CurrState = CHASE;
 			cout << "Changing to CHASE STATE" << endl;
 		}
 		// 4. Otherwise if Player is not in range, Enemy State will change to PATROL based on a timer.
 		else if (_dist > 20.0f && _Timer > 20.f)
 		{
+			_PrevState = IDLE;
 			_CurrState = PATROL;
 			cout << "Changing to PATROL STATE" << endl;
 		}
@@ -218,6 +232,7 @@ void CEnemy::Update(double dt)
 		// 3. Enemy State will change to IDLE based on a timer.
 		if (_Timer > 50.f)
 		{
+			_PrevState = PATROL;
 			_CurrState = IDLE;
 			_Timer = 0.0f;
 			cout << "Changing to IDLE STATE" << endl;
@@ -228,6 +243,7 @@ void CEnemy::Update(double dt)
 
 		if (_dist < 20.0f)
 		{
+			_PrevState = PATROL;
 			_CurrState = CHASE;
 			cout << "Changing to CHASE STATE" << endl;
 		}
@@ -249,6 +265,7 @@ void CEnemy::Update(double dt)
 
 		if (_dist > 20.0f)
 		{
+			_PrevState = CHASE;
 			_CurrState = IDLE;
 			_Timer = 0.0f;
 			cout << "Changing to IDLE STATE" << endl;
