@@ -611,3 +611,11 @@ void CPlayerInfo::DetachCamera()
 {
 	attachedCamera = nullptr;
 }
+
+bool CPlayerInfo::cameraAttached(void)
+{
+	if (attachedCamera)
+		return true;
+	else
+		return false;
+}

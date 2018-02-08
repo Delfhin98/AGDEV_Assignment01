@@ -15,6 +15,8 @@ using namespace std;
 #include "KeyboardController.h"
 #include "SceneManager.h"
 
+#include "../PlayerInfo/PlayerInfo.h"
+
 CPauseState::CPauseState()
 {
 
@@ -59,6 +61,13 @@ void CPauseState::Render()
 	GraphicsManager::GetInstance()->SetPerspectiveProjection(45.0f, 4.0f / 3.0f, 0.1f, 10000.0f);
 	GraphicsManager::GetInstance()->AttachCamera(&camera);
 
+	if (CPlayerInfo::GetInstance()->cameraAttached())
+	{
+		camera.SetCameraPos(CPlayerInfo::GetInstance()->GetPos());
+		camera.SetCameraTarget(CPlayerInfo::GetInstance()->GetTarget());
+		camera.SetCameraUp(CPlayerInfo::GetInstance()->GetUp());
+	}
+
 	// Render the required entities
 	EntityManager::GetInstance()->Render();
 
@@ -68,6 +77,7 @@ void CPauseState::Render()
 															  0, 
 															  Application::GetInstance().GetWindowHeight(), 
 															  -10, 10);
+	
 	GraphicsManager::GetInstance()->DetachCamera();
 
 	// Render the required entities
