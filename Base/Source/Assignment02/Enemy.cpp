@@ -165,7 +165,6 @@ void CEnemy::Update(double dt)
 
 	// Timer to be used to change state.
 	_Timer += (float)m_dSpeed * (float)dt * 0.1f;
-	cout << _Timer << endl;
 
 	// Update on Enemy State(s)
 	switch (_CurrState)
@@ -182,8 +181,16 @@ void CEnemy::Update(double dt)
 			target = defaultTarget;
 		}
 
-		// 3. Enemy State will change to PATROL based on a timer. (For now)
-		if (_Timer > 20.f)
+		// 3. Enemy State will change to CHASE when Player is within its range.
+		float _dist = (_playerInfo->GetPos() - position).Length();
+
+		if (_dist < 20.0f)
+		{
+			_CurrState = CHASE;
+			cout << "Changing to CHASE STATE" << endl;
+		}
+		// 4. Otherwise if Player is not in range, Enemy State will change to PATROL based on a timer.
+		else if (_dist > 20.0f && _Timer > 20.f)
 		{
 			_CurrState = PATROL;
 			cout << "Changing to PATROL STATE" << endl;
@@ -208,8 +215,18 @@ void CEnemy::Update(double dt)
 				target = defaultTarget;
 		}
 
-		// 3. Enemy State will change to CHASE based on a timer. (For now)
+		// 3. Enemy State will change to IDLE based on a timer.
 		if (_Timer > 50.f)
+		{
+			_CurrState = IDLE;
+			_Timer = 0.0f;
+			cout << "Changing to IDLE STATE" << endl;
+		}
+
+		// 4. Enemy State will change to CHASE if Player is within its range.
+		float _dist = (_playerInfo->GetPos() - position).Length();
+
+		if (_dist < 20.0f)
 		{
 			_CurrState = CHASE;
 			cout << "Changing to CHASE STATE" << endl;
@@ -225,13 +242,15 @@ void CEnemy::Update(double dt)
 		position += viewVector * (float)m_dSpeed * (float)dt;
 
 		// 2. Enemy will chase the Player.
-		target = _playerInfo->GetPos() - Vector3(2.f,2.f,2.f);
+		target = _playerInfo->GetPos() - Vector3(2.f, 2.f, 2.f);
 		
-		// 3. Enemy State will change to IDLE based on a timer. (For now)
-		if (_Timer > 80.f)
+		// 3. Enemy State will change to IDLE when Player is out of its range.
+		float _dist = (_playerInfo->GetPos() - position).Length();
+
+		if (_dist > 20.0f)
 		{
-			_Timer = 0.f;
 			_CurrState = IDLE;
+			_Timer = 0.0f;
 			cout << "Changing to IDLE STATE" << endl;
 		}
 
