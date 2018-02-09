@@ -181,9 +181,14 @@ void Assignment::Init()
 																							CLuaInterface::GetInstance()->GetField("y"),
 																							CLuaInterface::GetInstance()->GetField("z")));
 	lua_getglobal(CLuaInterface::GetInstance()->theLuaState, "Waypoint_A_3");
-	CWaypointManager::GetInstance()->AddWaypoint(anotherWaypoint, Vector3(	CLuaInterface::GetInstance()->GetField("x"),
+	int anotherWaypoint2 = CWaypointManager::GetInstance()->AddWaypoint(anotherWaypoint, Vector3(	CLuaInterface::GetInstance()->GetField("x"),
 																			CLuaInterface::GetInstance()->GetField("y"),
 																			CLuaInterface::GetInstance()->GetField("z")));
+	lua_getglobal(CLuaInterface::GetInstance()->theLuaState, "Waypoint_A_4");
+	CWaypointManager::GetInstance()->AddWaypoint(anotherWaypoint2, Vector3(CLuaInterface::GetInstance()->GetField("x"),
+		CLuaInterface::GetInstance()->GetField("y"),
+		CLuaInterface::GetInstance()->GetField("z")));
+
 	CWaypointManager::GetInstance()->PrintSelf();
 
 	// Create a CEnemy Instance
