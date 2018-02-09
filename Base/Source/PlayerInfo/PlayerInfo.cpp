@@ -205,6 +205,8 @@ void CPlayerInfo::Reset(void)
 	target = defaultTarget;
 	up = defaultUp;
 
+	health = 5;
+
 	// Stop vertical movement too
 	StopVerticalMovement();
 }
@@ -613,6 +615,11 @@ void CPlayerInfo::addHP(int add)
 int CPlayerInfo::getHP(void)
 {
 	return health;
+}
+
+void CPlayerInfo::setHP(int hp)
+{
+	this->health = hp;
 }
 
 void CPlayerInfo::AttachCamera(FPSCamera* _cameraPtr)

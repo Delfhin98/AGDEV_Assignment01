@@ -99,6 +99,7 @@ public:
 
 	void addHP(int add);
 	int getHP(void);
+	void setHP(int hp);
 
 	// Handling Camera
 	void AttachCamera(FPSCamera* _cameraPtr);

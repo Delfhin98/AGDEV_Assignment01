@@ -339,12 +339,16 @@ void Assignment::Update(double dt)
 	if (theEnemy->IsDone())
 	{
 		cout << "Loading WinState" << endl;
+		//enemyReset();
+		CPlayerInfo::GetInstance()->Reset();
 		SceneManager::GetInstance()->SetActiveScene("WinState");
 	}
 	//if player is dead
 	else if (CPlayerInfo::GetInstance()->getHP() <= 0)
 	{
 		cout << "Loading LoseState" << endl;
+		//enemyReset();
+		CPlayerInfo::GetInstance()->Reset();
 		SceneManager::GetInstance()->SetActiveScene("LoseState");
 	}
 
@@ -390,4 +394,18 @@ void Assignment::Exit()
 	// Delete the lights
 	delete lights[0];
 	delete lights[1];
+}
+
+//Reset enemy entity
+void Assignment::enemyReset()
+{
+	if (!theEnemy->IsDone())
+	{
+		theEnemy->SetIsDone(true);
+		theEnemy = nullptr;
+	}
+
+	theEnemy = new CEnemy();
+	theEnemy->Init();
+	theEnemy->SetTerrain(groundEntity);
 }

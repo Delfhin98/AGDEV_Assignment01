@@ -1,4 +1,4 @@
-﻿Build started 8/2/2018 8:26:52 PM.
+﻿Build started 9/2/2018 10:20:48 AM.
      1>Project "D:\School\AGDEV_Assignment01\Common\Common.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ID:\School\AGDEV_Assignment01\/glew/include /ID:\School\AGDEV_Assignment01\/glfw/include /ZI /nologo /W3 /WX- /Od /Oy- /D _VARIADIC_MAX=10 /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\Common.pdb" /Gd /TP /analyze- /errorReport:prompt Source\SceneManager.cpp
@@ -31,4 +31,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.96
+Time Elapsed 00:00:01.15

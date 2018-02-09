@@ -32,6 +32,8 @@ public:
 	virtual void Render();
 	virtual void Exit();
 
+	void enemyReset();
+
 private:
 	//Assignment(SceneManager* _sceneMgr); // This is used to register to SceneManager
 
