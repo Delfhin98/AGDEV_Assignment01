@@ -192,6 +192,9 @@ void Assignment::Init()
 	CWaypointManager::GetInstance()->PrintSelf();
 
 	// Create a CEnemy Instance
+	//for (int i = 0; i < 5; i++)
+	//	theEnemy = Create::Enemy(Vector3(Math::RandFloatMinMax(-40.0f, 40.0f), 0.0f, Math::RandFloatMinMax(-40.0f, 40.0f)), Vector3(Math::RandFloatMinMax(-40.0f, 40.0f), 0.0f, Math::RandFloatMinMax(-40.0f, 40.0f)));
+	
 	theEnemy = new CEnemy();
 	theEnemy->Init();
 
