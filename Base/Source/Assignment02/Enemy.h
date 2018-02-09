@@ -38,9 +38,6 @@ protected:
 	float _Timer;
 	// PlayerInfo
 	CPlayerInfo* _playerInfo;
-	// Initial Enemy State
-	ENEMY_STATE _CurrState;
-	ENEMY_STATE _PrevState;
 
 public:
 	CEnemy(void);
@@ -60,6 +57,8 @@ public:
 	void SetBoundary(Vector3 max, Vector3 min);
 	// Set the terrain for the player info
 	void SetTerrain(GroundEntity* m_pTerrain);
+	// Set States
+	void SetStates(CEnemy::ENEMY_STATE state);
 
 	// Get position
 	Vector3 GetPos(void) const;
@@ -71,6 +70,9 @@ public:
 	GroundEntity* GetTerrain(void);
 	// Get next Waypoint for this CEnemy
 	CWaypoint* GetNextWaypoint(void);
+	// Get Current State
+	CEnemy::ENEMY_STATE GetCurrentState(void);
+	CEnemy::ENEMY_STATE GetPreviousState(void);
 
 	// Update
 	void Update(double dt = 0.0333f);
@@ -79,4 +81,15 @@ public:
 	void Constrain(void);
 	// Render
 	void Render(void);
+
+	// Initial Enemy State
+	ENEMY_STATE _CurrState;
+	ENEMY_STATE _PrevState;
+};
+
+namespace Create
+{
+	CEnemy* Enemy(const Vector3& position,
+		const Vector3& target,
+		const Vector3& scale = Vector3(1.f,1.f,1.f));
 };

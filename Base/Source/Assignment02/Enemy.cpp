@@ -17,6 +17,7 @@ CEnemy::CEnemy()
 	, m_pTerrain(NULL)
 	, m_iWayPointIndex(-1)
 	, _CurrState(IDLE)
+	, _PrevState(IDLE)
 	, _Timer(0.0f)
 	, _playerInfo(NULL)
 {
@@ -123,6 +124,12 @@ void CEnemy::SetTerrain(GroundEntity* m_pTerrain)
 	}
 }
 
+void CEnemy::SetStates(CEnemy::ENEMY_STATE state)
+{
+	_CurrState = state;
+	_PrevState = state;
+}
+
 // Get position
 Vector3 CEnemy::GetPos(void) const
 {
@@ -157,6 +164,16 @@ CWaypoint* CEnemy::GetNextWaypoint(void)
 	}
 	else
 		return NULL;
+}
+
+CEnemy::ENEMY_STATE CEnemy::GetCurrentState(void)
+{
+	return _CurrState;
+}
+
+CEnemy::ENEMY_STATE CEnemy::GetPreviousState(void)
+{
+	return _PrevState;
 }
 
 // Update
@@ -314,4 +331,17 @@ void CEnemy::Render(void)
 		}
 	}
 	modelStack.PopMatrix();
+}
+
+CEnemy * Create::Enemy(const Vector3 & position, const Vector3 & target, const Vector3 & scale)
+{
+	CEnemy* result = new CEnemy();
+	result->Init();
+	result->SetPosition(position);
+	result->SetTarget(target);
+	result->SetScale(scale);
+
+	EntityManager::GetInstance()->AddEntity(result, true);
+
+	return result;
 }
